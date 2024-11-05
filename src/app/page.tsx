@@ -1,4 +1,40 @@
-import Image from "next/image";
+import React from 'react';
+import Header from '../components/Header';
+import RoommateList from '../components/RoommateList';
+import Footer from '../components/Footer';
+
+type Roommate = {
+  id: number;
+  name: string;
+  bio: string;
+  interests: string[];
+};
+
+
+
+const HomePage: React.FC = () => {
+  // Define roommates array with type annotation
+  const roommates = [
+    { id: 1, name: 'John Doe', age: 20, bio: 'Looking for a study buddy', interests: ['Music', 'Gaming'] },
+    { id: 2, name: 'Jane Smith', age: 22, bio: 'Outgoing and friendly', interests: ['Traveling', 'Cooking'] },
+  ];  
+
+  return (
+    <div>
+      <Header />
+      <main className="p-4">
+        <h1 className="text-3xl font-bold">Find Your Roommate</h1>
+        <RoommateList roommates={roommates} />
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+export default HomePage;
+
+
+/*import Image from "next/image";
 
 export default function Home() {
   return (
@@ -99,3 +135,4 @@ export default function Home() {
     </div>
   );
 }
+  */

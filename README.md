@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Instructions
 
-## Getting Started
+To initialize on your individual VS Code, insert the following commands in your terminal:
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+$ git clone https://github.com/isaiaspavon/web-final-project.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```
+$ git init
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+$ git remote add origin git@github.com:isaiaspavon/web-final-project.git
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+$ npm install
+```
 
-## Learn More
+```
+npm install react-router-dom
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Coding Workflow
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To begin coding and make changes onto the project:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Move task to "In Progress on Miro**
+Go to Miro and mark your task/feature into the "In progress" section. Be as specific as possible as to prevent future merge conflicts.
 
-## Deploy on Vercel
+2. **Create a new branch**
+In your terminal run the following command:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+$ git checkout -b <name-of-branch> 
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+You will make your changes in this branch and eventually merge back into the main branch.
+
+3. **Verify and stage branch**
+
+Once you are finished with your feature: MAKE SURE TO SAVE (Command+S). To clarify your changes, perform: 
+```
+$ git status
+```
+
+ in your terminal to double check that your changes are ready to be staged and committed. 
+
+4. **Merging your branch**
+
+After verifying, return to the main branch:
+
+```
+$ git checkout main
+```
+
+Merge your branch into the main branch:
+
+```
+$ git merge <name-of-branch>
+```
+
+Pull the latest changes from the main branch:
+ 
+ ```
+ $ git pull origin main
+ ```
+ 
+Finally push your changes:
+
+```  
+$ git push origin main
+```
