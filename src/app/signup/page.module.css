@@ -37,18 +37,6 @@
     flex-direction: column;
   }
   
-  .signupContainer {
-    width: 100%;
-    max-width: 24rem; /* Tailwind's max-w-md equivalent */
-    height: 24rem;     /* Tailwind's h-96 equivalent */
-    padding: 2rem;
-    background-color: white;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Shadow */
-    border-radius: 0.5rem; /* Rounded corners */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
   
   .title {
     font-size: 1.5rem;
@@ -64,6 +52,7 @@
   .label {
     display: block;
     color: #4A4A4A; /* Tailwind's text-gray-700 */
+    margin-bottom: 5px;
   }
   
   .input {
