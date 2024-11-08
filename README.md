@@ -19,10 +19,6 @@ $ npm install
 ```
 
 ```
-npm install react-router-dom
-```
-
-```
 $ npm install react@18.2.0 react-dom@18.2.0
 ```
 
