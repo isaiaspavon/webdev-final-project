@@ -1,0 +1,90 @@
+.signupBackground {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url('https://ramblerathens.com/wp-content/uploads/2023/06/roommates-1600x597.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden; /* Prevents overflow from the blurred background */
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    backdrop-filter: blur(8px); /* Apply blur effect */
+    z-index: 1;
+  }
+  
+  .content {
+    color:black;
+    position: relative;
+    z-index: 2; /* Ensure content is above the overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 24rem;
+    padding: 2rem;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    flex-direction: column;
+  }
+  
+  .signupContainer {
+    width: 100%;
+    max-width: 24rem; /* Tailwind's max-w-md equivalent */
+    height: 24rem;     /* Tailwind's h-96 equivalent */
+    padding: 2rem;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Shadow */
+    border-radius: 0.5rem; /* Rounded corners */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .formGroup {
+    margin-bottom: 1rem;
+  }
+  
+  .label {
+    display: block;
+    color: #4A4A4A; /* Tailwind's text-gray-700 */
+  }
+  
+  .input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #D1D5DB; /* Tailwind's border-gray-300 */
+    border-radius: 0.25rem;
+    margin-top: 0.25rem;
+  }
+  
+  .submitButton {
+    width: 50%;
+    margin-left: 105px;
+    background-color: #000000de; /* Tailwind's bg-blue-500 */
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    text-align: center;
+  }
+
+.br{
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
