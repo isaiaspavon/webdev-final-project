@@ -21,3 +21,28 @@ export async function POST(request: NextRequest) {
     await Item.create({ title, description, image });
     return NextResponse.json({ message: "Item added successfully"}), { status: 201 };
 }
+
+export async function PUT(request:NextRequest, { params }: RouteParams ) {
+    const { id } = params;
+    const { title: title, description: description, image: image } = await request.json();
+    await connectMongoDB();
+    await Item.findByIdAndUpdate(id, { title, description, image });
+    return NextResponse.json({ message: "Item updated"}), { status: 200};
+}
+
+export async function DELETE(request: NextRequest, { params }: RouteParams) {
+    const { id } = params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return NextResponse.json({ message: "Invalid ID format"}, { status: 400 });
+    }
+
+    await connectMongoDB();
+    const deletedItem = await Item.findByIdAndDelete(id);
+
+    if (!deletedItem) {
+        return NextResponse.json({ message: "Item not found"}, { status: 404 });
+    }
+
+    return NextResponse.json({ message: "Item deleted"}, { status: 200 });
+}
