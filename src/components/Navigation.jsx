@@ -1,6 +1,9 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './Navigation.Module.css';
+import HomePage from '../pages/Home';
+import CurrentRoommate from '../pages/CurrentRoommates';
 
 const Navigation = () => {
     return (
