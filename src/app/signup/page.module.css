@@ -82,9 +82,15 @@
     padding: 0.5rem;
     border-radius: 0.25rem;
     text-align: center;
+    margin-top: 10px;
   }
 
 .br{
     border-radius: 10px;
     margin-bottom: 10px;
+  }
+
+  .link{
+    padding: 0.5rem;
+    border-radius: 0.25rem;
   }

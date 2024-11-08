@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import styles from "./page.module.css";
+import Link from "next/link"
 
 const SignUp: React.FC = () => {
   const [fName, setfName]= useState('');
@@ -10,7 +11,7 @@ const SignUp: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('SignUp Details:', { email, password });
+    console.log('SignUp Details:', { fName, lName, email, password });
   };
 
   return (
@@ -62,9 +63,11 @@ const SignUp: React.FC = () => {
           required
         />
       </div>
-      <button type="submit" className={styles.submitButton}>
+      <Link href="/addprofile" passHref>
+        <button type="submit" className={styles.submitButton}>
         Next Page
-      </button>
+        </button>
+      </Link>
     </form>
   </div>
 </div>
