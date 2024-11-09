@@ -1,13 +1,17 @@
-// src/app/pages/Home.tsx
+// src/pages/AvailableSpaces.tsx
 'use client';
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-const Home: React.FC = () => {
+//components
+import Navigation from '../components/Navigation.jsx'; //nav
+
+const AvailableSpaces: React.FC = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold text-blue-600">Welcome to the UGA Roommate Finder</h1>
+      <Navigation /> {/* Navigation Bar */}
     </div>
   );
 };
 
-export default Home;
+export default AvailableSpaces;

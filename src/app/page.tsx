@@ -15,7 +15,7 @@ type Roommate = {
 const HomePage: React.FC = () => {
   // Define roommates array with type annotation
   const roommates = [
-    { id: 1, name: 'John Doe', age: 20, bio: 'Looking for a study buddy', interests: ['Music', 'Gaming'] },
+    { id: 1, name: 'John De', age: 20, bio: 'Looking for a study buddy', interests: ['Music', 'Gaming'] },
     { id: 2, name: 'Jane Smith', age: 22, bio: 'Outgoing and friendly', interests: ['Traveling', 'Cooking'] },
   ];  
 
