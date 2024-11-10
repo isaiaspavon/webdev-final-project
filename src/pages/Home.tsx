@@ -9,9 +9,9 @@ import ProfileCard from '../components/ProfileCard.jsx'; //card
 
 const Home: React.FC = () => {
   return (
-    <div className="flex items-start justify-between h-screen bg-gray-100">
+    <div className="flex items-center justify-center h-screen bg-gray-100">
       <Navigation /> {/* Navigation Bar */}
-      <ProfileCard /> {/* Profile Card */}
+      <ProfileCard />
     </div>
   );
 };

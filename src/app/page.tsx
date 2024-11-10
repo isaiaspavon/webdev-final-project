@@ -1,138 +1,63 @@
-import React from 'react';
-import Header from '../components/Header';
-import RoommateList from '../components/RoommateList';
-import Footer from '../components/Footer';
+'use client';
+import React, { useState } from 'react';
+import styles from "./page.module.css";
+import Link from "next/link"
 
-type Roommate = {
-  id: number;
-  name: string;
-  bio: string;
-  interests: string[];
-};
+const login: React.FC = () => {
+  const [fName, setfName]= useState('');
+  const [lName, setlName]= useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-
-
-const HomePage: React.FC = () => {
-  // Define roommates array with type annotation
-  const roommates = [
-    { id: 1, name: 'John De', age: 20, bio: 'Looking for a study buddy', interests: ['Music', 'Gaming'] },
-    { id: 2, name: 'Jane Smith', age: 22, bio: 'Outgoing and friendly', interests: ['Traveling', 'Cooking'] },
-  ];  
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('SignUp Details:', { fName, lName, email, password });
+  };
 
   return (
-    <div>
-      <Header />
-      <main className="p-4">
-        <h1 className="text-3xl font-bold">Find Your Roommate</h1>
-        <RoommateList roommates={roommates} />
-      </main>
-      <Footer />
-    </div>
-  );
-};
+<div className={styles.signupBackground}>
+  <div className={styles.overlay}></div>  {/* Blurred background overlay */}
+  
+  <div className={styles.content}>
+    {/* form content goes here */}
+    <h2 className="text-2xl font-semibold mb-6">Login</h2>
+    <form onSubmit={handleSubmit} className="space-y-4">
 
-export default HomePage;
-
-
-/*import Image from "next/image";
-
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+      <div>
+        <label className={styles.label}>Email:</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className={styles.input}
+          required
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+      <div>
+        <label className={styles.label}>Password:</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className={styles.input}
+          required
+        />
+      </div>
+      <Link href="/Home" passHref>
+        <button type="submit" className={styles.submitButton}>
+        Submit
+        </button>
+      </Link>
+      <Link href="/signup" passHref>
+        <button type="submit" className={styles.submitButton}>
+        Sign Up
+        </button>
+      </Link>
+      
+    </form>
+  </div>
+</div>
   );
-}
-  */
+};
+
+export default login;

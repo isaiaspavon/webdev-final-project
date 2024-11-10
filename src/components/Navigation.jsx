@@ -42,6 +42,14 @@ const Navigation = () => {
                     </div>
                 </Link>
             </button>
+            <button className="nav-item">
+                <Link href="/" passHref>
+                    <div className="Logout">
+                        <img src= 'https://cdn.iconscout.com/icon/free/png-256/free-logout-icon-download-in-svg-png-gif-file-formats--sign-out-exit-log-user-interface-pack-icons-1502401.png' alt="house logo" className ="mail-logo" />
+                        <span>Log Out</span>
+                    </div>
+                </Link>
+            </button>
         </div> 
     );
 };
