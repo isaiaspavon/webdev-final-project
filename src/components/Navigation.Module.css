@@ -66,3 +66,22 @@
     color: black;       
 }
 
+.Logout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center; 
+    width: 100%;
+    height: 100%;
+}
+
+.Logout span {
+    color: black !important;
+    text-decoration: none;
+}
+
+.Logout span:hover {
+    color: black !important;
+}
+
