@@ -44,16 +44,20 @@ const login: React.FC = () => {
           required
         />
       </div>
-      <Link href="/Home" passHref>
-        <button type="submit" className={styles.submitButton}>
-        Submit
-        </button>
-      </Link>
+
+      <div className={styles.buttonContainer}>
       <Link href="/signup" passHref>
         <button type="submit" className={styles.submitButton}>
         Sign Up
         </button>
       </Link>
+      
+      <Link href="/Home" passHref>
+        <button type="submit" className={styles.submitButton}>
+        Submit
+        </button>
+      </Link>
+      </div>
       
     </form>
   </div>
