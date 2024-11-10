@@ -21,7 +21,6 @@
   z-index: 1;
 }
 
-
 .addProfileContainer {
   display: flex;
   flex-direction: column;
@@ -85,6 +84,12 @@
   margin-right: auto;
   cursor: pointer;
 }
+
+.links{
+  margin-top: auto;
+  margin-bottom: 1rem;
+}
+
 
 .submitButton:hover {
   background-color: #005bb5;

@@ -142,9 +142,19 @@ const AddProfile: React.FC = () => {
                             </label>
                             </div>
 
-                        <label className={styles.label}>Cleanliness:</label>
-                        <input type="text" value={cleanliness} onChange={(e) => setCleanliness(e.target.value)} className={styles.input} />
-                    </div>
+                        <label className={styles.label}>How tidy are you?</label>
+                        <select 
+                            value={degreeLevel} 
+                            onChange={(e) => setDegreeLevel(e.target.value)} 
+                            className={styles.input}>
+                            <option value="" disabled hidden>Select Cleanliness Level</option>
+                            <option value="1">Could eat off the floor</option>
+                            <option value="2">Everything is put away</option>
+                            <option value="3">A little messy</option>
+                            <option value="4">Where’s the floor?</option>
+                        </select>
+
+                        </div>
 
                     <div className={styles.column}>
                         <label className={styles.label}>Degree Level:</label>
@@ -157,12 +167,20 @@ const AddProfile: React.FC = () => {
                             <option value="Graduate">Graduate</option>
                         </select>
 
-                        <label className={styles.label}>Gender:</label>
-                        <input type="text" value={gender} onChange={(e) => setGender(e.target.value)} className={styles.input} />
+                        <label className={styles.label}>Gender</label>
+                            <select 
+                                value={gender} 
+                                onChange={(e) => setGender(e.target.value)} 
+                                className={styles.input}>
+                                <option value="" disabled hidden>Select Your Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
 
                         <label className={styles.label}>Payments:</label>
                         <input type="text" value={payments} onChange={(e) => setPayments(e.target.value)} className={styles.input} />
-                        <Link href="/signup" passHref>
+                        <Link className={styles.links}href="/signup" passHref>
                             <button className={styles.submitButton}>
                              Previous
                              </button>
@@ -177,7 +195,7 @@ const AddProfile: React.FC = () => {
                         <label className={styles.label}>Question 2:</label>
                         <input type="text" value={question2} onChange={(e) => setQuestion2(e.target.value)} className={styles.input} />
 
-                        <Link href="/" passHref>
+                        <Link className={styles.links} href="/" passHref>
                             <button type="submit" className={styles.submitButton}>Save Profile</button>
                         </Link>
                     </div>
