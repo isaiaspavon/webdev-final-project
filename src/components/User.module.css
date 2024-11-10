@@ -1,8 +1,26 @@
 .userImg {
-    width: 200px;
-    height: 130px;
-    border: 10px solid red;
-    border-radius: 50px 50px;
+    margin-top:5%;
+    width: 75%;
+    height: 30%;
+    border: 3px solid red;
+    border-radius: 40%;
     border-image-width: 34px;
 }
+
+.innerCard {
+    padding: 16px;
+    background-color: #fff; 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 16px;
+    border-radius: 5%; 
+  }
+  
+  .userInfo {
+    margin-bottom: 12px; 
+  }
+
+  .bigCard{
+    background-color:#d9d9d9;
+  }
 
