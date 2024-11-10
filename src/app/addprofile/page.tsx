@@ -162,7 +162,13 @@ const AddProfile: React.FC = () => {
 
                         <label className={styles.label}>Payments:</label>
                         <input type="text" value={payments} onChange={(e) => setPayments(e.target.value)} className={styles.input} />
+                        <Link href="/signup" passHref>
+                            <button className={styles.submitButton}>
+                             Previous
+                             </button>
+                        </Link>
                     </div>
+
 
                     <div className={styles.column}>
                         <label className={styles.label}>Question 1:</label>
@@ -171,7 +177,9 @@ const AddProfile: React.FC = () => {
                         <label className={styles.label}>Question 2:</label>
                         <input type="text" value={question2} onChange={(e) => setQuestion2(e.target.value)} className={styles.input} />
 
-                        <button type="submit" className={styles.submitButton}>Save Profile</button>
+                        <Link href="/" passHref>
+                            <button type="submit" className={styles.submitButton}>Save Profile</button>
+                        </Link>
                     </div>
                 </form>
             </div>
