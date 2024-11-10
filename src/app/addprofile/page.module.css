@@ -21,7 +21,6 @@
   z-index: 1;
 }
 
-
 .addProfileContainer {
   display: flex;
   flex-direction: column;
@@ -86,6 +85,12 @@
   cursor: pointer;
 }
 
+.links{
+  margin-top: auto;
+  margin-bottom: 1rem;
+}
+
+
 .submitButton:hover {
   background-color: #005bb5;
 }
@@ -105,14 +110,14 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 800px; /* Set a maximum width */
+  max-width: 80%; /* Set a maximum width */
   max-height: 600px; /* Set a maximum height */
   padding: 2rem;
   background-color: white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
   flex-direction: column;
-  overflow-y: auto; /* Enable scrolling if content exceeds max height */
+  /* Enable scrolling if content exceeds max height */
 }
 
 .formContainer {
@@ -140,6 +145,12 @@
   color: #333;
   color: #4A4A4A; /* Tailwind's text-gray-700 */
   margin-bottom: 0rem; /* Space between label and input */
+  margin-right: 10px;
+}
+
+
+.checkboxOption{
+  margin-right: 10px;
 }
 
 .input {
@@ -150,4 +161,8 @@
   margin-top: 0.25rem;
   margin-bottom: 1rem;
   border: 1px solid #D1D5DB; /* Tailwind's border-gray-300 */
+}
+
+.boxes{
+  margin-right: 5px;
 }

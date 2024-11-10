@@ -36,6 +36,15 @@
     border-radius: 0.5rem;
     flex-direction: column;
   }
+
+  .column {
+    display: flex;
+    flex-direction: row;  /* Change from column to row to make the buttons side by side */
+    gap: 1rem;  /* Adds space between the buttons */
+    justify-content: center;  /* Optional: centers the buttons horizontally */
+    flex: 1;
+    min-width: 200px;
+  }
   
   
   .title {
@@ -45,6 +54,15 @@
     text-align: center;
   }
   
+  
+  .form {
+    display: flex;
+    gap: 2rem; /* Space between columns */
+    max-width: 800px;
+    width: 100%;
+  }
+
+
   .formGroup {
     margin-bottom: 1rem;
   }
@@ -82,4 +100,28 @@
   .link{
     padding: 0.5rem;
     border-radius: 0.25rem;
+  }
+
+  .buttonContainer {
+    display: flex;
+    justify-content: space-between;  /* Distributes space between buttons */
+    gap: .5rem;  /* Optional: Adds space between the buttons */
+    width: 100%;  /* Ensures container takes up full width */
+    min-width: fit-content;
+  }
+  
+  .submitButton {
+    padding: 0.5rem 1rem;  /* Adjust padding for a more balanced look */
+    background-color: #000000de;
+    color: white;
+    border-radius: 0.25rem;
+    text-align: center;
+    margin-top: 10px;  /* Optional: Adjust top margin if needed */
+    margin-left: Auto;
+    margin-right: Auto;
+    min-width: 10rem
+  }
+
+  .submitButton:hover {
+    background-color: #005bb5;
   }

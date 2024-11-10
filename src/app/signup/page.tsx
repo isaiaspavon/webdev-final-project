@@ -62,12 +62,18 @@ const SignUp: React.FC = () => {
           className={styles.input}
           required
         />
-      </div>
+      </div> 
+
+      <div className={styles.buttonContainer}>
+        <Link href="/" passHref>
+          <button className={styles.submitButton}>Previous</button>
+        </Link>
+
       <Link href="/addprofile" passHref>
-        <button type="submit" className={styles.submitButton}>
-        Next Page
-        </button>
+          <button type="submit" className={styles.submitButton}>Next</button>
       </Link>
+      </div>
+
     </form>
   </div>
 </div>
