@@ -1,8 +1,19 @@
-.usersContainer {
+/* Users.module.css */
+.bigCard {
+    background-color: #f5f5f5;
+    padding: 1%;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    margin: 0 auto; /* Center the big card horizontally */
+    background-color:#BA0C2F;
+  }
+  
+  .usersContainer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
-
-}
+    gap: 2%;
+    align-items: center; /* Center users vertically if needed */
+  }

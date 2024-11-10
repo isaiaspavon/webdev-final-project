@@ -16,10 +16,12 @@ interface UsersProps {
 
 export default function Users({ users }: UsersProps) {
     return (
-        <div className={styles.usersContainer}>
-            {users.map(user => (
-              <User key = {user.id} user = {user} />
-            ))}
+        <div className={styles.bigCard}>
+            <div className={styles.usersContainer}>
+                {users.map(user => (
+                <User key = {user.id} user = {user} />
+                ))}
+            </div>
         </div>
     );
 }
