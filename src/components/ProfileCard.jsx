@@ -1,5 +1,5 @@
 import React from 'react';
-import './ProfileCard.Module.css'; // Import the CSS for styling
+import './ProfileCard.Module.css'; 
 
 import HomePage from '../pages/Home';
 

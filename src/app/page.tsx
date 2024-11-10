@@ -20,6 +20,7 @@ const login: React.FC = () => {
   
   <div className={styles.content}>
     {/* form content goes here */}
+    <h1 className="text-2xl font-semibold mb-6">RoomSync</h1>
     <h2 className="text-2xl font-semibold mb-6">Login</h2>
     <form onSubmit={handleSubmit} className="space-y-4">
 
