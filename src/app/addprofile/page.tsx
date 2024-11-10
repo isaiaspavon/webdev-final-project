@@ -10,7 +10,7 @@ const AddProfile: React.FC = () => {
     const [degreeLevel, setDegreeLevel] = useState('');
     const [gender, setGender] = useState('');
     const [payments, setPayments] = useState('');
-    const [question1, setQuestion1] = useState('');
+    const [question1, setQuestion1] = useState<string[]>([]); // Using an array to store selected values
     const [question2, setQuestion2] = useState('');
 
     // State for the pets-related questions
@@ -189,8 +189,55 @@ const AddProfile: React.FC = () => {
 
 
                     <div className={styles.column}>
-                        <label className={styles.label}>Question 1:</label>
-                        <input type="text" value={question1} onChange={(e) => setQuestion1(e.target.value)} className={styles.input} />
+                    {/* Noise Acceptability Question with Multiple Checkboxes */}
+                    <label className={styles.label}>When is noise acceptable in your living environment?</label>
+                    <div className={styles.checkboxGroup}>
+                        <label className={styles.checkboxOption}>
+                            <input className = {styles.boxes}
+                                type="checkbox"
+                                name="noiseMorning"
+                                checked={question1.includes("morning")}
+                                onChange={() => {
+                                    if (question1.includes("morning")) {
+                                        setQuestion1(question1.filter((time) => time !== "morning"));
+                                    } else {
+                                        setQuestion1([...question1, "morning"]);
+                                    }
+                                }}
+                            />
+                            Morning
+                        </label>
+                        <label className={styles.checkboxOption}>
+                            <input className = {styles.boxes}
+                                type="checkbox"
+                                name="noiseEvening"
+                                checked={question1.includes("evening")}
+                                onChange={() => {
+                                    if (question1.includes("evening")) {
+                                        setQuestion1(question1.filter((time) => time !== "evening"));
+                                    } else {
+                                        setQuestion1([...question1, "evening"]);
+                                    }
+                                }}
+                            />
+                            Evening
+                        </label>
+                        <label className={styles.checkboxOption}>
+                            <input className = {styles.boxes}
+                                type="checkbox"
+                                name="noiseNight"
+                                checked={question1.includes("night")}
+                                onChange={() => {
+                                    if (question1.includes("night")) {
+                                        setQuestion1(question1.filter((time) => time !== "night"));
+                                    } else {
+                                        setQuestion1([...question1, "night"]);
+                                    }
+                                }}
+                            />
+                            Night
+                        </label>
+                    </div>
 
                         <label className={styles.label}>Question 2:</label>
                         <input type="text" value={question2} onChange={(e) => setQuestion2(e.target.value)} className={styles.input} />
