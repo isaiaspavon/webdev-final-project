@@ -1,77 +1,54 @@
 'use client';
-import React, { useState } from 'react';
-import styles from "./page.module.css";
-import Link from "next/link"
+import React, {useState} from 'react';
 
-const SignUp: React.FC = () => {
-  const [fName, setfName]= useState('');
-  const [lName, setlName]= useState('');
+const LoginPage = () => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('SignUp Details:', { fName, lName, email, password });
-  };
 
-  return (
-<div className={styles.signupBackground}>
-  <div className={styles.overlay}></div>  {/* Blurred background overlay */}
-  
-  <div className={styles.content}>
-    {/* Your form content goes here */}
-    <h2 className="text-2xl font-semibold mb-6">Sign Up</h2>
-    <form onSubmit={handleSubmit} className="space-y-4">
-    <div>
-        <label className={styles.label}>First Name:</label>
-        <input
-          type="first name"
-          value={fName}
-          onChange={(e) => setfName(e.target.value)}
-          className={styles.input}
-          required
-        />
-      </div>
-      <div>
-        <label className={styles.label}>Last Name:</label>
-        <input
-          type="last name"
-          value={lName}
-          onChange={(e) => setlName(e.target.value)}
-          className={styles.input}
-          required
-        />
-      </div>
-      <br />
-      <div>
-        <label className={styles.label}>Email:</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className={styles.input}
-          required
-        />
-      </div>
-      <div>
-        <label className={styles.label}>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className={styles.input}
-          required
-        />
-      </div>
-      <Link href="/addprofile" passHref>
-        <button type="submit" className={styles.submitButton}>
-        Next Page
-        </button>
-      </Link>
-    </form>
-  </div>
-</div>
-  );
+    // CALL BACKEND API HERE: DELETE/OVERRIDE IF NEED BE
+    const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type' : 'application/json'},
+        body: JSON.stringify({email, password}),
+  });
+
+  if (response.ok) {
+    // Redirect to dashboard or homepage, or update user context
+    console.log('Login successful!');
+  } else {
+    // Handle login error, e.g., show error message
+    console.error('Login failed.');
+  }
 };
 
-export default SignUp;
+return (
+  <div className="p-4">
+    <h1 className="text-3xl font-bold">Login</h1>
+    <form onSubmit={handleLogin} className="space-y-4">
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="border p-2 w-full"
+        required
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="border p-2 w-full"
+        required
+      />
+      <button type="submit" className="bg-blue-600 text-white rounded px-4 py-2">Login</button>
+    </form>
+  </div>
+);
+};
+
+export default LoginPage;
