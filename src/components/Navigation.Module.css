@@ -4,11 +4,11 @@
     left: 0;
     display: flex;
     flex-direction: column;
-    width: 90px;
+    width: 6%;
     background-color: #BA0C2F;
     padding-top: 20px;
-    padding-left: 15px; /* Adjust padding for better alignment */
-    height: 100vh;  /* Full viewport height */
+    padding-left: 15px; 
+    height: 100vh; 
     outline: none;
 }
 
@@ -17,9 +17,9 @@
     flex-direction: column;
     align-items: center;
     background-color: #FFFFFF;
-    width: 70px;
-    height: 45px;
-    margin-top: 50px; /* Reduced margin for spacing between items */
+    width: 75%;
+    height: 6%;
+    margin-top: 50%; 
     border-radius: 35%;
     text-align: center;
     transition: background-color 0.3s, color 0.3s;
@@ -37,9 +37,19 @@
 }
 
 .mail-logo, .msg-logo, .ppl-logo {
-    width: 40px;
+    width: 70%;
     display: flex;
     align-items: center;
     outline: none;
+}
+
+.nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center; /* Centers content vertically within the button */
+    width: 100%;
+    height: 100%;
 }
 
