@@ -46,10 +46,6 @@ export default function Home() {
 
   return (
     <div>
-      <h1>These are available user profiles</h1>
-
-      <p>Click Button to add user</p>
-
       <Users users = {users}/>
     </div>    
   );
