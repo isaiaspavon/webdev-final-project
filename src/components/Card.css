@@ -1,0 +1,11 @@
+.card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 10px;
+  background-color: beige;
+  width: 300px;
+  height: 400px;
+
+  display: flex;
+  flex-direction: column; /* Stack the children vertically*/
+  align-items: center; /* Center the content horizontally  */
+}
