@@ -48,6 +48,7 @@ const AddProfile: React.FC = () => {
                         <option value="Electrical Engineering">Electrical Engineering</option>
                         <option value="English">English</option>
                         <option value="Environmental Science">Environmental Science</option>
+                        <option value="Exercise and Sports Science">Exercise and Sports Science</option>
                         <option value="Finance">Finance</option>
                         <option value="History">History</option>
                         <option value="International Relations">International Relations</option>
