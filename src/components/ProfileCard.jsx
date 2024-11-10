@@ -9,10 +9,10 @@ const CardContainer = () => {
     <div className="big-card">
       <div className="left-card">
         <div className="Pfp-card">
-            <p>Hi</p>
+            <img src="https://pbs.twimg.com/ext_tw_video_thumb/1630814377451614208/pu/img/QKQMJ4rIMpYYYm9d.jpg" alt="profile picture" className="profile-pic" />
         </div>
         <div className="desc-card">
-            <p>Hi</p>
+        <p>This is a brief description about the user.</p>
         </div>
       </div>
       <div className="right-cards">

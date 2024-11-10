@@ -47,11 +47,9 @@
 
   .Pfp-card,
   .desc-card{
-    border: 1px solid #000;
     border-radius: 20px;
     height:220px;
     grid-column: 1 / 3;
-    border: 1px solid #ccc;
     padding: 10px;
     background-color: #f4f4f4;
     font-size: 18px;
@@ -60,6 +58,12 @@
 
   .desc-card{
     Margin-top:15px;
-
+    border: 1px solid #000;
   }
   
+  .profile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 25%;
+  }
