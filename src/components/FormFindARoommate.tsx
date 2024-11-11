@@ -175,12 +175,12 @@ export default function SignupX({ onAddUser }: SignupProps) {
    };
 
      return (
-         <div className="flex justify-center items-center min-h-screen bg-gray-100 py-3">
-         <Card className={`${styles.input} w-full max-w-lg p-3 bg-white shadow-md rounded-md`}>
-           <h1 className="text-4xl font-bold mb-6 text-center">Signup</h1>
+         <div>
+         <Card className={`${styles.input}`}>
+           <h1>Signup</h1>
            <form onSubmit={handleSubmit}>
              <label htmlFor="name">Name</label>
-             <input className="p-2 border border-gray-300 rounded-md text-base focus:outline-none focus:border-blue-500"
+             <input
                id="name"
                type="text"
                placeholder="Enter your name"
@@ -188,7 +188,7 @@ export default function SignupX({ onAddUser }: SignupProps) {
                value={name}
              />
              <label htmlFor="username">Username</label>
-             <input className="p-2 border border-gray-300 rounded-md text-base focus:outline-none focus:border-blue-500"
+             <input
                id="username"
                type="text"
                placeholder="Enter your username"
@@ -196,7 +196,7 @@ export default function SignupX({ onAddUser }: SignupProps) {
                value={username}
              />
              <label htmlFor="description">Description</label>
-             <input className="p-2 border border-gray-300 rounded-md text-base focus:outline-none focus:border-blue-500"
+             <input
                id="description"
                type="description"
                placeholder="Enter your description"
@@ -204,7 +204,7 @@ export default function SignupX({ onAddUser }: SignupProps) {
                value={description}
              />
              <label htmlFor="imageLink">Image Link</label>
-             <input className="border border-gray-300 rounded-md text-base focus:outline-none focus:border-blue-500"
+             <input
                id="imageLink"
                type="url"
                placeholder="Enter image URL"
