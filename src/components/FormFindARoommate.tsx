@@ -1,3 +1,4 @@
+   /*
    import React from "react";
    import { useState, ChangeEvent, FormEvent } from 'react';
    import Button from './Button'; // Assuming you have a Button component
@@ -107,3 +108,113 @@
    };
    
    export default Signup;
+   */
+"use client";
+import { useState, ChangeEvent, FormEvent } from 'react';
+import Card from './Card'; 
+import Button from './Button';
+import styles from './RoommateForm.module.css'; 
+import { useRouter } from 'next/navigation';
+
+type User = {
+   id: number;
+   name: string;
+   username: string;
+   description: string;
+   imageUrl: string;
+};
+ 
+type SignupProps = {
+   onAddUser: (user: User) => void;
+};
+
+export default function SignupX({ onAddUser }: SignupProps) {
+   const [name, setName] = useState('');
+   const [username, setUsername] = useState('');
+   const [description, setDescription] = useState('');
+   const [imageUrl, setImageUrl] = useState('');
+ 
+   const nameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+     setName(event.target.value);
+   };
+ 
+   const usernameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+     setUsername(event.target.value);
+   };
+ 
+   const descriptionChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+     setDescription(event.target.value);
+   };
+ 
+   const imageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+     setImageUrl(event.target.value);
+   };
+
+   const handleSubmit = (event: React.FormEvent) => {
+     event.preventDefault();
+
+     if ( !name || !username || !description || !imageUrl ) {
+         alert("A username and password are required!");
+         return;
+     }
+
+     const newUser: User = {
+         id: Math.random(), 
+         name,
+         username,
+         description,
+         imageUrl,
+       };
+
+     onAddUser(newUser);
+
+     setName('');
+     setUsername('');
+     setDescription('');
+     setImageUrl('');
+   };
+
+     return (
+         <div className="flex justify-center items-center min-h-screen bg-gray-100 py-3">
+         <Card className={`${styles.input} w-full max-w-lg p-3 bg-white shadow-md rounded-md`}>
+           <h1 className="text-4xl font-bold mb-6 text-center">Signup</h1>
+           <form onSubmit={handleSubmit}>
+             <label htmlFor="name">Name</label>
+             <input className="p-2 border border-gray-300 rounded-md text-base focus:outline-none focus:border-blue-500"
+               id="name"
+               type="text"
+               placeholder="Enter your name"
+               onChange={nameChangeHandler}
+               value={name}
+             />
+             <label htmlFor="username">Username</label>
+             <input className="p-2 border border-gray-300 rounded-md text-base focus:outline-none focus:border-blue-500"
+               id="username"
+               type="text"
+               placeholder="Enter your username"
+               onChange={usernameChangeHandler}
+               value={username}
+             />
+             <label htmlFor="description">Description</label>
+             <input className="p-2 border border-gray-300 rounded-md text-base focus:outline-none focus:border-blue-500"
+               id="description"
+               type="description"
+               placeholder="Enter your description"
+               onChange={descriptionChangeHandler}
+               value={description}
+             />
+             <label htmlFor="imageLink">Image Link</label>
+             <input className="border border-gray-300 rounded-md text-base focus:outline-none focus:border-blue-500"
+               id="imageLink"
+               type="url"
+               placeholder="Enter image URL"
+               onChange={imageChangeHandler}
+               value={imageUrl}
+             />
+       
+             <Button type="submit">Enter Button</Button>
+           </form>
+         </Card>
+         </div>
+       );
+ } 

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Users from './Users';
 import Signup from './FormFindARoommate'
+import SignupX from "./FormFindARoommate";
 
 type User = {
   id: number;
@@ -48,7 +49,8 @@ export default function Home() {
   return (
     <div>
       <Users users = {users}/>
-      <Signup onAddUser={addUser}/>
+      {/*<Signup onAddUser={addUser}/>*/}
+      <SignupX onAddUser={addUser} />
     </div>    
   );
 }
