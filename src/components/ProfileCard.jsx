@@ -9,7 +9,7 @@ const CardContainer = () => {
     <div className="big-card">
       <div className="left-card">
         <div className="Pfp-card">
-            <img src="https://pbs.twimg.com/ext_tw_video_thumb/1630814377451614208/pu/img/QKQMJ4rIMpYYYm9d.jpg" alt="profile picture" className="profile-pic" />
+            <img src="https://i.redd.it/5wbwtwkesdpa1.jpg" alt="profile picture" className="profile-pic" />
         </div>
         <div className="desc-card">
         <p>This is a brief description about the user.</p>
