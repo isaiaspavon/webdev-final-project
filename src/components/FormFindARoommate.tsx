@@ -175,46 +175,49 @@ export default function SignupX({ onAddUser }: SignupProps) {
    };
 
      return (
-         <div>
-         <Card className={`${styles.input}`}>
-           <h1>Signup</h1>
-           <form onSubmit={handleSubmit}>
-             <label htmlFor="name">Name</label>
-             <input
-               id="name"
-               type="text"
-               placeholder="Enter your name"
-               onChange={nameChangeHandler}
-               value={name}
-             />
-             <label htmlFor="username">Username</label>
-             <input
-               id="username"
-               type="text"
-               placeholder="Enter your username"
-               onChange={usernameChangeHandler}
-               value={username}
-             />
-             <label htmlFor="description">Description</label>
-             <input
-               id="description"
-               type="description"
-               placeholder="Enter your description"
-               onChange={descriptionChangeHandler}
-               value={description}
-             />
-             <label htmlFor="imageLink">Image Link</label>
-             <input
-               id="imageLink"
-               type="url"
-               placeholder="Enter image URL"
-               onChange={imageChangeHandler}
-               value={imageUrl}
-             />
-       
-             <Button type="submit">Enter Button</Button>
-           </form>
-         </Card>
-         </div>
+      <div className={styles.flexCenter}>
+      <Card className={styles.card}>
+        <h1 className={styles.signupTitle}>Signup</h1>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <label htmlFor="name">Name</label>
+          <input
+            className={styles.inputField}
+            id="name"
+            type="text"
+            placeholder="Enter your name"
+            onChange={nameChangeHandler}
+            value={name}
+          />
+          <label htmlFor="username">Username</label>
+          <input
+            className={styles.inputField}
+            id="username"
+            type="text"
+            placeholder="Enter your username"
+            onChange={usernameChangeHandler}
+            value={username}
+          />
+          <label htmlFor="description">Description</label>
+          <input
+            className={styles.inputField}
+            id="description"
+            type="text"
+            placeholder="Enter your description"
+            onChange={descriptionChangeHandler}
+            value={description}
+          />
+          <label htmlFor="imageLink">Image Link</label>
+          <input
+            className={styles.inputField}
+            id="imageLink"
+            type="url"
+            placeholder="Enter image URL"
+            onChange={imageChangeHandler}
+            value={imageUrl}
+          />
+          <Button type="submit">Enter Button</Button>
+        </form>
+      </Card>
+    </div>
        );
  } 
