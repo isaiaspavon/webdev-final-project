@@ -1,0 +1,16 @@
+.outside-card {
+    display:;
+    gap: 2%;
+    border: 2px solid #000;
+    padding: 1%;
+    width: 87%;
+    height: 80%;
+    margin-left: 10%;
+    margin-top: 3%;
+    border-radius: 20px;
+    background-color: #c0c0c0;
+}
+
+.inside-card{
+    
+}
