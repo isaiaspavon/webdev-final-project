@@ -166,3 +166,9 @@
 .boxes{
   margin-right: 5px;
 }
+
+.textArea{
+  background-color: #f0f0f0;
+  min-height: 150px;
+  outline: 1px solid black;
+}

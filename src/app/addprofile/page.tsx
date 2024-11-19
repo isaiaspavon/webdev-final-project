@@ -5,13 +5,11 @@ import Link from "next/link"
 
 const AddProfile: React.FC = () => {
     const [major, setMajor] = useState('');
-    const [pets, setPets] = useState('');
     const [cleanliness, setCleanliness] = useState('');
     const [degreeLevel, setDegreeLevel] = useState('');
     const [gender, setGender] = useState('');
-    const [payments, setPayments] = useState('');
-    const [question1, setQuestion1] = useState<string[]>([]); // Using an array to store selected values
-    const [question2, setQuestion2] = useState('');
+    const[roomatePreference, setRoomatePreference] = useState('');
+    const [briefDescription, setBriefDescription] = useState('');
 
     // State for the pets-related questions
     const [hasPets, setHasPets] = useState<string | null>(null); // "yes" or "no"
@@ -20,7 +18,7 @@ const AddProfile: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Profile Details:', { major, pets, cleanliness, degreeLevel, gender, payments, question1, question2, hasPets, mindsPets, petType });
+        console.log('Profile Details:', { major, cleanliness, degreeLevel, gender, roomatePreference, briefDescription, hasPets, mindsPets, petType });
     };
 
     return (
@@ -72,6 +70,54 @@ const AddProfile: React.FC = () => {
                         <option value="Sociology">Sociology</option>
                         <option value="Theater">Theater</option>
                     </select>
+
+                    <label className={styles.label}>Gender</label>
+                            <select 
+                                value={gender} 
+                                onChange={(e) => setGender(e.target.value)} 
+                                className={styles.input}>
+                                <option value="" disabled hidden>Select Your Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+
+                        
+
+                        <label className={styles.label}>How tidy are you?</label>
+                        <select 
+                            value={cleanliness} 
+                            onChange={(e) => setCleanliness(e.target.value)} 
+                            className={styles.input}>
+                            <option value="" disabled hidden>Select Cleanliness Level</option>
+                            <option value="1">Could eat off the floor</option>
+                            <option value="2">Everything is put away</option>
+                            <option value="3">A little messy</option>
+                            <option value="4">Where’s the floor?</option>
+                        </select>
+
+                        <label className={styles.label}>Roomate Preference</label>
+                            <select 
+                                value={roomatePreference} 
+                                onChange={(e) => setRoomatePreference(e.target.value)} 
+                                className={styles.input}>
+                                <option value="">Select Roomate Preference</option>
+                                <option value="">Co-ed</option>
+                                <option value="">Gender Segregated</option>
+                            </select>
+
+                        </div>
+
+                    <div className={styles.column}>
+                        <label className={styles.label}>Degree Level:</label>
+                        <select 
+                            value={degreeLevel} 
+                            onChange={(e) => setDegreeLevel(e.target.value)} 
+                            className={styles.input}>
+                            <option value="" disabled hidden>Select Degree Level</option>
+                            <option value="Undergraduate">Undergraduate</option>
+                            <option value="Graduate">Graduate</option>
+                        </select>
 
                         {/* PETS QUESTIONS */}
                         {/* Question: Do you have pets? */}
@@ -140,46 +186,10 @@ const AddProfile: React.FC = () => {
                                 />
                                 No
                             </label>
-                            </div>
-
-                        <label className={styles.label}>How tidy are you?</label>
-                        <select 
-                            value={degreeLevel} 
-                            onChange={(e) => setDegreeLevel(e.target.value)} 
-                            className={styles.input}>
-                            <option value="" disabled hidden>Select Cleanliness Level</option>
-                            <option value="1">Could eat off the floor</option>
-                            <option value="2">Everything is put away</option>
-                            <option value="3">A little messy</option>
-                            <option value="4">Where’s the floor?</option>
-                        </select>
-
-                        </div>
-
-                    <div className={styles.column}>
-                        <label className={styles.label}>Degree Level:</label>
-                        <select 
-                            value={degreeLevel} 
-                            onChange={(e) => setDegreeLevel(e.target.value)} 
-                            className={styles.input}>
-                            <option value="" disabled hidden>Select Degree Level</option>
-                            <option value="Undergraduate">Undergraduate</option>
-                            <option value="Graduate">Graduate</option>
-                        </select>
-
-                        <label className={styles.label}>Gender</label>
-                            <select 
-                                value={gender} 
-                                onChange={(e) => setGender(e.target.value)} 
-                                className={styles.input}>
-                                <option value="" disabled hidden>Select Your Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
-                            </select>
-
-                        <label className={styles.label}>Payments:</label>
-                        <input type="text" value={payments} onChange={(e) => setPayments(e.target.value)} className={styles.input} />
+                            </div>                    
+                        
+                        
+                        
                         <Link className={styles.links}href="/signup" passHref>
                             <button className={styles.submitButton}>
                              Previous
@@ -189,58 +199,14 @@ const AddProfile: React.FC = () => {
 
 
                     <div className={styles.column}>
-                    {/* Noise Acceptability Question with Multiple Checkboxes */}
-                    <label className={styles.label}>When is noise acceptable in your living environment?</label>
-                    <div className={styles.checkboxGroup}>
-                        <label className={styles.checkboxOption}>
-                            <input className = {styles.boxes}
-                                type="checkbox"
-                                name="noiseMorning"
-                                checked={question1.includes("morning")}
-                                onChange={() => {
-                                    if (question1.includes("morning")) {
-                                        setQuestion1(question1.filter((time) => time !== "morning"));
-                                    } else {
-                                        setQuestion1([...question1, "morning"]);
-                                    }
-                                }}
-                            />
-                            Morning
-                        </label>
-                        <label className={styles.checkboxOption}>
-                            <input className = {styles.boxes}
-                                type="checkbox"
-                                name="noiseEvening"
-                                checked={question1.includes("evening")}
-                                onChange={() => {
-                                    if (question1.includes("evening")) {
-                                        setQuestion1(question1.filter((time) => time !== "evening"));
-                                    } else {
-                                        setQuestion1([...question1, "evening"]);
-                                    }
-                                }}
-                            />
-                            Evening
-                        </label>
-                        <label className={styles.checkboxOption}>
-                            <input className = {styles.boxes}
-                                type="checkbox"
-                                name="noiseNight"
-                                checked={question1.includes("night")}
-                                onChange={() => {
-                                    if (question1.includes("night")) {
-                                        setQuestion1(question1.filter((time) => time !== "night"));
-                                    } else {
-                                        setQuestion1([...question1, "night"]);
-                                    }
-                                }}
-                            />
-                            Night
-                        </label>
-                    </div>
+                    <label className={styles.label}>Enter a brief description about yourself :</label>
 
-                        <label className={styles.label}>Question 2:</label>
-                        <input type="text" value={question2} onChange={(e) => setQuestion2(e.target.value)} className={styles.input} />
+                    <textarea 
+                        value={briefDescription} 
+                        className={styles.textArea} 
+                        onChange={(e) => setBriefDescription(e.target.value)}
+                        />
+
 
                         <Link className={styles.links} href="/" passHref>
                             <button type="submit" className={styles.submitButton}>Save Profile</button>
