@@ -1,16 +1,16 @@
 .outside-card {
-    display:;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Three columns */
+    grid-template-rows: auto; /* Rows will adjust dynamically */
     gap: 2%;
     border: 2px solid #000;
     padding: 1%;
-    width: 87%;
+    width: 84%;
     height: 80%;
-    margin-left: 10%;
+    margin-left: 12%;
     margin-top: 3%;
+    box-sizing: border-box;
     border-radius: 20px;
     background-color: #c0c0c0;
-}
-
-.inside-card{
-    
+    align-items: center; /* Center users vertically if needed */
 }
