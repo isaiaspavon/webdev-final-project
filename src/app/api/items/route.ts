@@ -23,6 +23,10 @@ export async function GET() {
 // POST: Add a new profile
 export async function POST(request: NextRequest) {
     const {
+        first_name, 
+        last_name,
+        email,
+        password,
         major,
         cleanliness,
         degreeLevel,
@@ -38,6 +42,10 @@ export async function POST(request: NextRequest) {
 
     try {
         const newUser = await User.create({
+            first_name, 
+            last_name,
+            email,
+            password,
             major,
             cleanliness,
             degreeLevel,
