@@ -2,7 +2,7 @@
     margin-top:5%;
     width: 75%;
     height: 30%;
-    border: 3px solid red;
+    border: 2px solid #000;
     border-radius: 40%;
     border-image-width: 34px;
 }
@@ -22,6 +22,8 @@
 
   .bigCard{
     background-color:#d9d9d9;
+    border: 2px solid #000;
+
   }
 
   
