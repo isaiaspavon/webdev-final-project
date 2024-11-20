@@ -8,8 +8,20 @@ import Navigation from '../components/Navigation.jsx'; //nav
 import ProfileCard from '../components/ProfileCard.jsx'; //card
 
 const Home: React.FC = () => {
+  const imgUrl = 'https://live.staticflickr.com/2423/3632781339_9fdd85743f_b.jpg';
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
+    <div style={{
+      backgroundImage: `url(${imgUrl})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      height: '95vh', 
+      width: '100vw', 
+      margin: 0,      
+      padding: 0,
+      display: 'flex',
+      flexDirection: 'column', 
+    }}>
       <Navigation /> {/* Navigation Bar */}
       <ProfileCard />
     </div>

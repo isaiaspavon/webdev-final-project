@@ -12,7 +12,7 @@ const Container = () => {
     return (
         <div className="outside-card">
         <div className="inside-card-1">
-
+            
         </div>
         <div className="inside-card-1">
             <Property 
