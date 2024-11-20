@@ -1,32 +1,37 @@
 import mongoose, { Document, Schema } from "mongoose";
 
 export interface IUser extends Document {
-    firstname: String;
-    lastname: String;
-    email: String;
-    password: String;
-    major: String;
-    pets: Boolean;
-    mindpets: Boolean;
-    tidiness: String;
-    degreelvl: String;
-    gender: String;
-    genderpref: String;
+    fName: string;
+    lName: string;
+    email: string;
+    password: string;
+    major: string;
+    cleanliness: string;
+    degreeLevel: string;
+    gender: string;
+    roommatePreference: string;
+    briefDescription: string;
+    hasPets: boolean;
+    mindsPets: boolean;
+    petType?: string; // Optional if user doesn't have pets
 }
 
 const userSchema = new Schema<IUser>({
-    firstname: {type: String, required: true},
-    lastname: {type: String, required: true},
-    email: {type: String, required: true},
-    password: {type: String, required: true},
-    major: {type: String, required: true},
-    pets: {type: Boolean, required: true},
-    mindpets: {type: Boolean, required: true},
-    tidiness: {type: String, required: true},
-    degreelvl: {type: String, required: true},
-    gender: {type: String, required: true},
-    genderpref: {type: String, required: true},
+    fName: { type: String, required: false },
+    lName: { type: String, required: false },
+    email: { type: String, required: false },
+    password: { type: String, required: false },
+    major: { type: String, required: false },
+    cleanliness: { type: String, required: false },
+    degreeLevel: { type: String, required: false },
+    gender: { type: String, required: false },
+    roommatePreference: { type: String, required: false },
+    briefDescription: { type: String, required: false },
+    hasPets: { type: Boolean, required: false },
+    mindsPets: { type: Boolean, required: false },
+    petType: { type: String, required: false },
 
 })
 
-export const User = mongoose.models.User?? mongoose.model("User", userSchema);
+const User = mongoose.models.User || mongoose.model("User", userSchema);
+export default User;

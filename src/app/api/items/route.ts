@@ -1,5 +1,5 @@
 import connectMongoDB from "@/libs/mongodb";
-import Item from "@/models/itemSchema";
+import User from "@/models/UserSchema";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import mongoose from "mongoose";
@@ -8,41 +8,116 @@ interface RouteParams {
     params: { id: string };
 }
 
-export async function GET(request: NextRequest, { params }: RouteParams) {
-    const { id } = params;
+// GET: Fetch all profiles
+export async function GET() {
     await connectMongoDB();
-    const items = await Item.find();
-    return NextResponse.json({ items }, { status: 200 });
+    try {
+        const users = await User.find();
+        return NextResponse.json({ success: true, data: users }, { status: 200 });
+    } catch (error) {
+        console.error("Error fetching profiles:", error); // Log the error for debugging
+        return NextResponse.json({ success: false, message: "Error fetching profiles" }, { status: 500 });
+    }
 }
 
+// POST: Add a new profile
 export async function POST(request: NextRequest) {
-    const {title, description, image} = await request.json();
+    const {
+        major,
+        cleanliness,
+        degreeLevel,
+        gender,
+        roommatePreference,
+        briefDescription,
+        hasPets,
+        mindsPets,
+        petType,
+    } = await request.json();
+
     await connectMongoDB();
-    await Item.create({ title, description, image });
-    return NextResponse.json({ message: "Item added successfully"}), { status: 201 };
+
+    try {
+        const newUser = await User.create({
+            major,
+            cleanliness,
+            degreeLevel,
+            gender,
+            roommatePreference,
+            briefDescription,
+            hasPets,
+            mindsPets,
+            petType: hasPets ? petType : null, // Only include petType if the user has pets
+        });
+
+        return NextResponse.json({ success: true, data: newUser, message: "Profile added successfully" }, { status: 201 });
+    } catch (error) {
+        console.error("Error adding profile:", error); // Log the error for debugging
+        return NextResponse.json({ success: false, message: "Error adding profile" }, { status: 500 });
+    }
 }
 
-export async function PUT(request:NextRequest, { params }: RouteParams ) {
+// PUT: Update an existing profile
+export async function PUT(request: NextRequest, { params }: RouteParams) {
     const { id } = params;
-    const { title: title, description: description, image: image } = await request.json();
+    const {
+        major,
+        cleanliness,
+        degreeLevel,
+        gender,
+        roommatePreference,
+        briefDescription,
+        hasPets,
+        mindsPets,
+        petType,
+    } = await request.json(); // Expecting fields in the user schema
+
     await connectMongoDB();
-    await Item.findByIdAndUpdate(id, { title, description, image });
-    return NextResponse.json({ message: "Item updated"}), { status: 200};
+
+    try {
+        const updatedUser = await User.findByIdAndUpdate(id, {
+
+            major,
+            cleanliness,
+            degreeLevel,
+            gender,
+            roommatePreference,
+            briefDescription,
+            hasPets,
+            mindsPets,
+            petType: hasPets ? petType : null, // Only update petType if user has pets
+        }, { new: true }); // The `new: true` option returns the updated document
+
+        if (!updatedUser) {
+            return NextResponse.json({ message: "User not found" }, { status: 404 });
+        }
+
+        return NextResponse.json({ success: true, data: updatedUser, message: "Profile updated successfully" }, { status: 200 });
+    } catch (error) {
+        console.error("Error updating profile:", error); // Log the error for debugging
+        return NextResponse.json({ success: false, message: "Error updating profile" }, { status: 500 });
+    }
 }
 
+// DELETE: Delete an existing profile
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
     const { id } = params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return NextResponse.json({ message: "Invalid ID format"}, { status: 400 });
+        return NextResponse.json({ message: "Invalid ID format" }, { status: 400 });
     }
 
     await connectMongoDB();
-    const deletedItem = await Item.findByIdAndDelete(id);
 
-    if (!deletedItem) {
-        return NextResponse.json({ message: "Item not found"}, { status: 404 });
+    try {
+        const deletedUser = await User.findByIdAndDelete(id);
+
+        if (!deletedUser) {
+            return NextResponse.json({ message: "User not found" }, { status: 404 });
+        }
+
+        return NextResponse.json({ success: true, message: "Profile deleted successfully" }, { status: 200 });
+    } catch (error) {
+        console.error("Error deleting profile:", error); // Log the error for debugging
+        return NextResponse.json({ success: false, message: "Error deleting profile" }, { status: 500 });
     }
-
-    return NextResponse.json({ message: "Item deleted"}, { status: 200 });
 }
