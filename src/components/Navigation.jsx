@@ -26,14 +26,7 @@ const Navigation = () => {
                     </div>
                 </Link>
             </button>
-            <button className="nav-item">
-                <Link href="/CurrentRoommates" passHref>
-                    <div className="nav-link">
-                        <img src= 'https://cdn.iconscout.com/icon/free/png-256/free-myspace-logo-icon-download-in-svg-png-gif-file-formats--social-media-pack-logos-icons-721961.png' alt="people logo" className ="ppl-logo" />
-                        <span>Current Roomates</span>
-                    </div>
-                </Link>
-            </button>
+
             <button className="nav-item">
                 <Link href="/AvailableSpaces" passHref>
                     <div className="nav-link">
@@ -42,14 +35,7 @@ const Navigation = () => {
                     </div>
                 </Link>
             </button>
-            <button className="nav-item">
-                <Link href="/BuildingReview" passHref>
-                    <div className="nav-link">
-                        <img src= 'https://icons.iconarchive.com/icons/fa-team/fontawesome/512/FontAwesome-Door-Open-icon.png' alt="house logo" className ="mail-logo" />
-                        <span>Building Review</span>
-                    </div>
-                </Link>
-            </button>
+
             <button className="nav-item">
                 <Link href="/" passHref>
                     <div className="Logout">

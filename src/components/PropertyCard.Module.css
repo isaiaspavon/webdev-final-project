@@ -1,5 +1,6 @@
 .theCard {
-    width: 95%;
+    width: 94%;
+    height: 100%;
     border: 2px solid #000;
     border-radius: 8px;
     overflow: hidden;
