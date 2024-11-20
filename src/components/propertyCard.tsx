@@ -8,7 +8,7 @@ interface Cardprops {
 
 const Card: React.FC<Cardprops> = ({ imgSrc, name, address }) => {
   return (
-    <div className="card">
+    <div className="theCard">
       <img src={imgSrc} alt={name} className="card-img" />
       <div className="card-content">
         <h2 className="card-name">{name}</h2>
