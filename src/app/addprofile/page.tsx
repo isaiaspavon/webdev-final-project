@@ -55,18 +55,18 @@ const AddProfile = () => {
     };
 
     return (
-        <div className={styles.signupBackground}>
-            <div className={styles.overlay}></div> {/* Blurred background overlay */}
-            <div className={styles.content}>
-                <h2 className={styles.title}>Your Preferences</h2>
+        <div className={styles.signupBackground2}>
+            <div className={styles.overlay2}></div> {/* Blurred background overlay */}
+            <div className={styles.content2}>
+                <h2 className={styles.title2}>Your Preferences</h2>
 
-                <form onSubmit={handleSubmit} className={styles.form}>
-                    <div className={styles.column}>
-                        <label className={styles.label}>Major:</label>
+                <form onSubmit={handleSubmit} className={styles.form2}>
+                    <div className={styles.column2}>
+                        <label className={styles.label2}>Major:</label>
                         <select 
                             value={major} 
                             onChange={(e) => setMajor(e.target.value)} 
-                            className={styles.input}>
+                            className={styles.input2}>
                             <option value="">Select a Major</option>
                             <option value="Accounting">Accounting</option>
                             <option value="Anthropology">Anthropology</option>
@@ -104,22 +104,22 @@ const AddProfile = () => {
                             <option value="Theater">Theater</option>
                         </select>
 
-                        <label className={styles.label}>Gender</label>
+                        <label className={styles.label2}>Gender</label>
                         <select 
                             value={gender} 
                             onChange={(e) => setGender(e.target.value)} 
-                            className={styles.input}>
+                            className={styles.input2}>
                             <option value="" disabled hidden>Select Your Gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                             <option value="other">Other</option>
                         </select>
 
-                        <label className={styles.label}>How tidy are you?</label>
+                        <label className={styles.label2}>How tidy are you?</label>
                         <select 
                             value={cleanliness} 
                             onChange={(e) => setCleanliness(e.target.value)} 
-                            className={styles.input}>
+                            className={styles.input2}>
                             <option value="" disabled hidden>Select Cleanliness Level</option>
                             <option value="1">Could eat off the floor</option>
                             <option value="2">Everything is put away</option>
@@ -127,23 +127,23 @@ const AddProfile = () => {
                             <option value="4">Where’s the floor?</option>
                         </select>
 
-                        <label className={styles.label}>Roommate Preference</label>
+                        <label className={styles.label2}>Roommate Preference</label>
                         <select 
                             value={roommatePreference} 
                             onChange={(e) => setRoommatePreference(e.target.value)} 
-                            className={styles.input}>
+                            className={styles.input2}>
                             <option value="">Select Roommate Preference</option>
                             <option value="Co-ed">Co-ed</option>
                             <option value="Gender Segregated">Gender Segregated</option>
                         </select>
                     </div>
 
-                    <div className={styles.column}>
-                        <label className={styles.label}>Degree Level:</label>
+                    <div className={styles.column2}>
+                        <label className={styles.label2}>Degree Level:</label>
                         <select 
                             value={degreeLevel} 
                             onChange={(e) => setDegreeLevel(e.target.value)} 
-                            className={styles.input}>
+                            className={styles.input2}>
                             <option value="" disabled hidden>Select Degree Level</option>
                             <option value="Undergraduate">Undergraduate</option>
                             <option value="Graduate">Graduate</option>
@@ -151,9 +151,9 @@ const AddProfile = () => {
 
                         {/* PETS QUESTIONS */}
                         {/* Question: Do you have pets? */}
-                        <label className={styles.label}>Do you have pets?</label>
-                        <div className={styles.radioGroup}>
-                            <label className={styles.radioOption}>
+                        <label className={styles.label2}>Do you have pets?</label>
+                        <div className={styles.radioGroup2}>
+                            <label className={styles.radioOption2}>
                                 <input
                                     type="radio"
                                     name="hasPets"
@@ -164,7 +164,7 @@ const AddProfile = () => {
                                 />
                                 Yes
                             </label>
-                            <label className={styles.radioOption}>
+                            <label className={styles.radioOption2}>
                                 <input
                                     type="radio"
                                     name="hasPets"
@@ -179,22 +179,22 @@ const AddProfile = () => {
 
                         {/* Conditional Question: If they have pets, ask for the type */}
                         {hasPets === "yes" && (
-                            <div className={styles.formGroup}>
-                                <label className={styles.label}>What type of pet do you have?</label>
+                            <div className={styles.formGroup2}>
+                                <label className={styles.label2}>What type of pet do you have?</label>
                                 <input
                                     type="text"
                                     value={petType}
                                     onChange={(e) => setPetType(e.target.value)}
-                                    className={styles.input}
+                                    className={styles.input2}
                                     required
                                 />
                             </div>
                         )}
 
                         {/* Question: Do you mind living with pets? */}
-                        <label className={styles.label}>Do you mind living with pets?</label>
-                        <div className={styles.radioGroup}>
-                            <label className={styles.radioOption}>
+                        <label className={styles.label2}>Do you mind living with pets?</label>
+                        <div className={styles.radioGroup2}>
+                            <label className={styles.radioOption2}>
                                 <input
                                     type="radio"
                                     name="mindsPets"
@@ -205,7 +205,7 @@ const AddProfile = () => {
                                 />
                                 Yes
                             </label>
-                            <label className={styles.radioOption}>
+                            <label className={styles.radioOption2}>
                                 <input
                                     type="radio"
                                     name="mindsPets"
@@ -219,19 +219,19 @@ const AddProfile = () => {
                         </div>
                         
                         <Link href="/previousPage" passHref>
-                            <button className={styles.submitButton}>Previous</button>
+                            <button className={styles.submitButton2}>Previous</button>
                         </Link>
                     </div>
 
-                    <div className={styles.column}>
-                        <label className={styles.label}>Enter a brief description about yourself:</label>
+                    <div className={styles.column2}>
+                        <label className={styles.label2}>Enter a brief description about yourself:</label>
 
                         <textarea 
                             value={briefDescription} 
-                            className={styles.textArea} 
+                            className={styles.textArea2} 
                             onChange={(e) => setBriefDescription(e.target.value)}
                         />
-                        <button type="submit" className={styles.submitButton}>Save Profile</button>
+                        <button type="submit" className={styles.submitButton2}>Save Profile</button>
                     </div>
                 </form>
             </div>
