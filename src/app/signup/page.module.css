@@ -102,24 +102,30 @@
     border-radius: 0.25rem;
   }
 
-  .buttonContainer1 {
+  .buttonContainer2 {
     display: flex;
     justify-content: space-between;  /* Distributes space between buttons */
     gap: .5rem;  /* Optional: Adds space between the buttons */
     width: 100%;  /* Ensures container takes up full width */
     min-width: fit-content;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: flex-end; /* Push button to the bottom */
+    height: 100%; /* Ensure the container takes the full height */
+    padding: 1rem; /* Optional padding */
   }
   
   .submitButton1 {
-    padding: 0.5rem 1rem;  /* Adjust padding for a more balanced look */
-    background-color: #000000de;
+    width: 100%;
+    
+    padding: 0.5rem;
+    background-color: #000000c7;
     color: white;
+    border: none;
     border-radius: 0.25rem;
-    text-align: center;
-    margin-top: 10px;  /* Optional: Adjust top margin if needed */
-    margin-left: Auto;
-    margin-right: Auto;
-    min-width: 10rem
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
   }
 
   .submitButton1:hover {
@@ -201,13 +207,13 @@
   
   .submitButton2 {
     width: 100%;
-    max-width: 14rem;
+
     padding: 0.5rem;
     background-color: #000000c7;
     color: white;
     border: none;
+    margin-bottom: 16px;
     border-radius: 0.25rem;
-    margin-top: auto;
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
@@ -289,6 +295,17 @@
     margin-top: 0.25rem;
     margin-bottom: 1rem;
     border: 1px solid #D1D5DB; /* Tailwind's border-gray-300 */
+  }
+
+  .input3 {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #D1D5DB;
+    border-radius: 0.25rem;
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid #D1D5DB; /* Tailwind's border-gray-300 */
+    min-height: 224;
   }
   
   .boxes2 {

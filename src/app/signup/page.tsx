@@ -2,8 +2,10 @@
 import React, { useState } from 'react';
 import styles from './page.module.css';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const SignUpAndProfile: React.FC = () => {
+  const router = useRouter();
   // State for SignUp details
   const [fName, setfName] = useState('');
   const [lName, setlName] = useState('');
@@ -63,6 +65,7 @@ const SignUpAndProfile: React.FC = () => {
       const result = await response.json();
       if (result.success) {
         alert('Profile saved successfully!');
+        router.push('/');
         // Optional: Redirect or clear the form
       } else {
         alert('Error saving profile: ' + result.message);
@@ -289,6 +292,15 @@ const SignUpAndProfile: React.FC = () => {
                     No
                   </label>
                 </div>
+                <div className={styles.buttonContainer2}>
+                  <button
+                    type="button"
+                    onClick={() => setIsSignUpComplete(false)} // Revert to Sign Up
+                    className={styles.submitButton1} // Add a secondary button style
+                  >
+                    Previous
+                  </button>
+                  </div>
               </div>
 
               <div className={styles.column2}>
@@ -296,15 +308,17 @@ const SignUpAndProfile: React.FC = () => {
                 <textarea
                   value={briefDescription}
                   onChange={(e) => setBriefDescription(e.target.value)}
-                  className={styles.input2}
+                  className={styles.input3}
                   rows={4}
                 />
-              </div>
 
-              <div className={styles.buttonContainer2}>
+              <div className={styles.buttonContainer}>
                 <button type="submit" className={styles.submitButton2}>
                   Save Profile
                 </button>
+              </div>
+
+
               </div>
             </form>
           </>
