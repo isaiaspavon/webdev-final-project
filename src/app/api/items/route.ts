@@ -42,8 +42,8 @@ export async function POST(request: NextRequest) {
 
     try {
         const newUser = await User.create({
-            first_name, 
-            last_name,
+            fName, 
+            lName,
             email,
             password,
             major,
