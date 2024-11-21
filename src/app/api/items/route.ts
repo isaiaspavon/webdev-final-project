@@ -42,6 +42,7 @@ export async function POST(request: NextRequest) {
 
     try {
         const newUser = await User.create({
+            
             first_name, 
             last_name,
             email,
@@ -68,6 +69,10 @@ export async function POST(request: NextRequest) {
 export async function PUT(request: NextRequest, { params }: RouteParams) {
     const { id } = params;
     const {
+        first_name, 
+        last_name,
+        email,
+        password,
         major,
         cleanliness,
         degreeLevel,
@@ -83,7 +88,10 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 
     try {
         const updatedUser = await User.findByIdAndUpdate(id, {
-
+            first_name, 
+            last_name,
+            email,
+            password,
             major,
             cleanliness,
             degreeLevel,
