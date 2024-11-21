@@ -7,6 +7,9 @@
     width: 80%;
     margin: 0 auto; /* Center the big card horizontally */
     background-color:#BA0C2F;
+    border: 2px solid #000;
+    margin-left: 13%;
+
   }
   
   .usersContainer {
