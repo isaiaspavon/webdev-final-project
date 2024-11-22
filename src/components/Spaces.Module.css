@@ -15,6 +15,24 @@
     align-items: center; /* Center users vertically if needed */
 }
 
+.inside-card-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Three columns */
+    grid-template-rows: auto; /* Rows will adjust dynamically */
+    gap: 2%;
+    border: 2px solid #000;
+    padding: 1%;
+    width: 84%;
+    height: 80%;
+    margin-left: 8%;
+    margin-top: 3%;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color: #c0c0c0;
+    align-items: center; /* Center items vertically if needed */
+    min-height: 250px; /* Set a default space when empty */
+}
+
 
 .outside-card {
     gap: 2%;

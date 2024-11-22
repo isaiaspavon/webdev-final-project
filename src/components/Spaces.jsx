@@ -11,7 +11,7 @@ import Property from './propertyCard.tsx';
 const Container = () => {
     return (
         <div className="outside-card">
-        <div className="inside-card-1">
+        <div className="inside-card-2">
             
         </div>
         <div className="inside-card-1">

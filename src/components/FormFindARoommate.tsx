@@ -66,14 +66,14 @@ export default function SignupX({ onAddUser }: SignupProps) {
      return (
       <div className={styles.flexCenter}>
       <Card className={styles.card}>
-        <h1 className={styles.signupTitle}>Signup</h1>
+        <h1 className={styles.signupTitle}>Manually Add Roommates Here</h1>
         <form className={styles.form} onSubmit={handleSubmit}>
           <label htmlFor="name">Name</label>
           <input
             className={styles.inputField}
             id="name"
             type="text"
-            placeholder="Enter your name"
+            placeholder="Enter name"
             onChange={nameChangeHandler}
             value={name}
           />
@@ -82,7 +82,7 @@ export default function SignupX({ onAddUser }: SignupProps) {
             className={styles.inputField}
             id="username"
             type="text"
-            placeholder="Enter your username"
+            placeholder="Enter username"
             onChange={usernameChangeHandler}
             value={username}
           />
@@ -91,7 +91,7 @@ export default function SignupX({ onAddUser }: SignupProps) {
             className={styles.inputField}
             id="description"
             type="text"
-            placeholder="Enter your description"
+            placeholder="Enter description"
             onChange={descriptionChangeHandler}
             value={description}
           />
