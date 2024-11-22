@@ -36,6 +36,7 @@ export async function POST(request: NextRequest) {
         hasPets,
         mindsPets,
         petType,
+        imageURL
     } = await request.json();
 
     await connectMongoDB();
@@ -55,6 +56,7 @@ export async function POST(request: NextRequest) {
             hasPets,
             mindsPets,
             petType: hasPets ? petType : null, // Only include petType if the user has pets
+            imageURL
         });
 
         return NextResponse.json({ success: true, data: newUser, message: "Profile added successfully" }, { status: 201 });
@@ -81,6 +83,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
         hasPets,
         mindsPets,
         petType,
+        imageURL
     } = await request.json(); // Expecting fields in the user schema
 
     await connectMongoDB();
@@ -100,6 +103,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
             hasPets,
             mindsPets,
             petType: hasPets ? petType : null, // Only update petType if user has pets
+            imageURL
         }, { new: true }); // The `new: true` option returns the updated document
 
         if (!updatedUser) {

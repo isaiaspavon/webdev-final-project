@@ -14,6 +14,7 @@ export interface IUser extends Document {
     hasPets: boolean;
     mindsPets: boolean;
     petType?: string; // Optional if user doesn't have pets
+    imageURL : string;
 }
 
 const userSchema = new Schema<IUser>({
@@ -30,6 +31,7 @@ const userSchema = new Schema<IUser>({
     hasPets: { type: Boolean, required: false },
     mindsPets: { type: Boolean, required: false },
     petType: { type: String, required: false },
+    imageURL: {type: String, required: false }
 
 })
 
