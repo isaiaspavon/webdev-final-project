@@ -4,6 +4,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { User } from "./models/UserSchema";
+import connectMongoDB from "./libs/mongodb";
 
 export const{
     handlers: {GET, POST},
@@ -24,6 +25,7 @@ export const{
                 if (!credentials) return null;
                 try {
                   console.log("Attempting to find user...");
+                    await connectMongoDB();
               
                   const user = await User.findOne({ email: credentials.email }).lean();
               
@@ -36,7 +38,7 @@ export const{
                         email: user.email,
                         name: user.fName,
                       };
-                      
+
                     } else {
                       console.log("Email or Password is not correct");
                       return null;

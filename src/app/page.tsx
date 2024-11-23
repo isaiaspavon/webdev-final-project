@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation"; // For programmatic navigation
 import { signIn } from "next-auth/react";
+import connectMongoDB from '@/libs/mongodb';
 
 // Helper function for credential login
 export async function doCredentialLogin(formData: FormData): Promise<any> {
@@ -19,7 +20,6 @@ export async function doCredentialLogin(formData: FormData): Promise<any> {
     console.log("SignIn Response:", response);
     return response;
   } catch (err: any) {
-    console.error("Login error:", err);
     return null;
   }
 }
