@@ -1,8 +1,9 @@
 import connectMongoDB from "@/libs/mongodb";
-import User from "@/models/UserSchema";
+import {User} from "@/models/UserSchema";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import mongoose from "mongoose";
+import bcrypt from 'bcryptjs'
 
 interface RouteParams {
     params: { id: string };
@@ -42,11 +43,12 @@ export async function POST(request: NextRequest) {
     await connectMongoDB();
 
     try {
+        const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = await User.create({
             fName, 
             lName,
             email,
-            password,
+            password: hashedPassword,
             major,
             cleanliness,
             degreeLevel,
