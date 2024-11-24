@@ -17,6 +17,7 @@ const CardContainer = () => {
       </div>
       <div className="right-cards">
         <div className="top-right-card">
+          <p>Name :</p>
           <p>Major :</p>
           <p>Gender : </p>
           <p>Roommate Preference : </p>
