@@ -1,0 +1,47 @@
+/* Styling each individual profile card */
+.bigCard {
+    /* background-color: slategray;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); */
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 180px;  /* Width of the card */
+    height: 250px; /* Height of the card */
+    margin: 10px;  /* Margin around each card */
+    display: flex;
+    flex-direction: column; /* Stack elements inside the card vertically */
+    justify-content: space-between; /* Distribute space between child elements */
+    background-color: pink; /* Optional: pink background */
+    border: 2px solid #000;
+}
+
+.bigCard:hover {
+    transform: translateY(-5px); /* Add a subtle hover effect */
+}
+
+/* Inner card content */
+.innerCard {
+    margin-top: 16px;
+    justify-content: space-between;
+  }
+  
+  .userInfo {
+    margin-bottom: 16px;
+  }
+
+
+.usersContainer {
+    /* display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2%;
+    align-items: center; /* Center users vertically if needed */
+    display: flex;          /* Flexbox layout for horizontal stacking */
+    flex-wrap: wrap;        /* Wrap cards to the next line when the row is full */
+    justify-content: flex-start; /* Align items to the left */
+    gap: 1rem;              /* Add spacing between the cards */
+    margin-top: 20px;       /* Optional: Adds spacing from the top */
+  } 
