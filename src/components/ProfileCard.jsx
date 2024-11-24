@@ -12,7 +12,7 @@ const CardContainer = () => {
             <img src="https://i.redd.it/5wbwtwkesdpa1.jpg" alt="profile picture" className="profile-pic" />
         </div>
         <div className="desc-card">
-        <p>This is a brief description about the user.</p>
+          <p>This is a brief description about the user.</p>
         </div>
       </div>
       <div className="right-cards">

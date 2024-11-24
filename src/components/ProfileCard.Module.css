@@ -40,7 +40,7 @@
   .bottom-right-card {
     border: 1px solid #ccc;
     padding: 10px;
-    background-color: #f4f4f4;
+    background-color: #efefef;
     border-radius: 20px;
 
   }
@@ -59,6 +59,7 @@
   .desc-card{
     Margin-top:15px;
     border: 1px solid #000;
+    background-color: #efefef;
   }
   
   .profile-pic {
@@ -67,3 +68,49 @@
     object-fit: cover;
     border-radius: 25%;
   }
+  
+  /**************************************/
+  /* ADD Font Styling to the Paragraphs */
+  /**************************************/
+
+.desc-card p {
+  font-family: "PT Sans Narrow", sans-serif;
+  text-align: center;
+  font-size: 26px;
+  letter-spacing: .03em;
+  color: black;
+  font-weight: 600;
+}
+
+.top-right-card p {
+  font-family: "PT Sans Narrow", sans-serif;
+  margin-left: 18px;
+  letter-spacing: .04em;
+  color: black;
+  font-weight: 600;
+  }
+
+.bottom-right-card p {
+  font-family: "PT Sans Narrow", sans-serif;
+  margin-left: 18px;
+  letter-spacing: .04em;
+  color: black;
+  font-weight: 600;
+}
+
+/* Left Card? */
+
+.left-card {
+  background-image: url(https://media0.giphy.com/media/ddfb7PvwyzrepUhsdZ/200w.gif?cid=6c09b952wy40elr2zufhcq9n4j93tisnol8x4b3romgu4qi6&ep=v1_gifs_search&rid=200w.gif&ct=g);
+  background-size: 100%;
+}
+
+/* big card? */
+
+.big-card {
+  background-color: firebrick;
+}
+
+.Pfp-card {
+  background-color: firebrick;
+}
