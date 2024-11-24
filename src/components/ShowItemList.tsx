@@ -67,7 +67,6 @@ export default function ShowItemsList() {
     return (
         <div>
             <div className={styles.upperCard}>
-                <h1>Roommates</h1>
                 {/* Map through the addedItems array to display all added items */}
                 {addedItems.map((addedItem) => (
                     <Card key={addedItem._id} className={styles.bigCard}>

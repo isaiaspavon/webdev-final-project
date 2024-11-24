@@ -1,0 +1,19 @@
+/* FindARoommate.module.css */
+.container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100vh;
+    background-color: burlywood; /* bg-gray-100 */
+  }
+  
+  .navigation {
+    width: 30%;
+    padding: 1rem;
+  }
+  
+  .showItemsList {
+    flex: 1;
+    padding: 1rem;
+  }
+  
