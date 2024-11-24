@@ -76,11 +76,6 @@
     height: 100%;
 }
 
-.Logout span {
-    color: black !important;
-    text-decoration: none;
-}
-
 .Logout span:hover {
     color: black !important;
 }
@@ -92,6 +87,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Baskervville+SC&family=Kiwi+Maru&display=swap');
 
 .nav-link span {
+    font-family: 'Kiwi Maru', serif;
+    margin-top: 8px;
+    color: white;
+    font-weight: 600;
+}
+
+.Logout span {
     font-family: 'Kiwi Maru', serif;
     margin-top: 8px;
     color: white;
