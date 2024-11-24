@@ -9,11 +9,23 @@ interface RouteParams {
 }
 
 // GET: Fetch all profiles
+// export async function GET() {
+//     await connectMongoDB();
+//     try {
+//         const users = await User.find();
+//         return NextResponse.json({ success: true, data: users }, { status: 200 });
+//     } catch (error) {
+//         console.error("Error fetching profiles:", error); // Log the error for debugging
+//         return NextResponse.json({ success: false, message: "Error fetching profiles" }, { status: 500 });
+//     }
+// }
+
+// GET: Fetch all profiles
 export async function GET() {
     await connectMongoDB();
     try {
         const users = await User.find();
-        return NextResponse.json({ success: true, data: users }, { status: 200 });
+        return NextResponse.json({ success: true, items: users }, { status: 200 }); // Change 'data' to 'items'
     } catch (error) {
         console.error("Error fetching profiles:", error); // Log the error for debugging
         return NextResponse.json({ success: false, message: "Error fetching profiles" }, { status: 500 });
