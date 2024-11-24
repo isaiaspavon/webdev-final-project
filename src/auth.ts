@@ -37,6 +37,7 @@ export const{
                         id: user._id.toString(),
                         email: user.email,
                         name: user.fName,
+                        lName: user.lName,
                       };
 
                     } else {
