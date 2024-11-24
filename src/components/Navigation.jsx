@@ -22,7 +22,7 @@ const Navigation = () => {
                 <Link href="/FindARoommate" passHref>
                     <div className="nav-link">
                         <img src= 'https://cdn.iconscout.com/icon/free/png-256/free-message-icon-download-in-svg-png-gif-file-formats--text-communication-conversation-chat-pack-sign-symbols-icons-1976874.png' alt="msg logo" className ="msg-logo" />
-                        <span>Find A Roomate</span>
+                        <span>Roommates</span>
                     </div>
                 </Link>
             </button>
