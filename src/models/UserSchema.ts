@@ -11,8 +11,8 @@ export interface IUser extends Document {
     gender: string;
     roommatePreference: string;
     briefDescription: string;
-    hasPets: boolean;
-    mindsPets: boolean;
+    hasPets: string;
+    mindsPets: string;
     petType?: string; // Optional if user doesn't have pets
     imageURL : string;
 }
@@ -28,8 +28,8 @@ const userSchema = new mongoose.Schema<IUser>({
     gender: { type: String, required: false },
     roommatePreference: { type: String, required: false },
     briefDescription: { type: String, required: false },
-    hasPets: { type: Boolean, required: false },
-    mindsPets: { type: Boolean, required: false },
+    hasPets: { type: String, required: false },
+    mindsPets: { type: String, required: false },
     petType: { type: String, required: false },
     imageURL: {type: String, required: false }
 

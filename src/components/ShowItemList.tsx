@@ -16,8 +16,8 @@ interface Item {
     gender: string;
     roommatePreference: string;
     briefDescription: string;
-    hasPets: boolean;
-    mindsPets: boolean;
+    hasPets: string;
+    mindsPets: string;
     petType?: string;
     imageURL: string;
     __v: string;
