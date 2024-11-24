@@ -14,13 +14,14 @@ export interface IUser extends Document {
     hasPets: boolean;
     mindsPets: boolean;
     petType?: string; // Optional if user doesn't have pets
+    imageURL : string;
 }
 
-const userSchema = new Schema<IUser>({
-    fName: { type: String, required: false },
-    lName: { type: String, required: false },
-    email: { type: String, required: false },
-    password: { type: String, required: false },
+const userSchema = new mongoose.Schema<IUser>({
+    fName: { type: String, required: true},
+    lName: { type: String, required: true },
+    email: { type: String, required: true, unique: true},
+    password: { type: String, required: true },
     major: { type: String, required: false },
     cleanliness: { type: String, required: false },
     degreeLevel: { type: String, required: false },
@@ -30,8 +31,8 @@ const userSchema = new Schema<IUser>({
     hasPets: { type: Boolean, required: false },
     mindsPets: { type: Boolean, required: false },
     petType: { type: String, required: false },
+    imageURL: {type: String, required: false }
 
 })
 
-const User = mongoose.models.User || mongoose.model("User", userSchema);
-export default User;
+export const User = mongoose.models.User ?? mongoose.model("User", userSchema);

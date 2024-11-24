@@ -19,6 +19,8 @@ const SignUpAndProfile: React.FC = () => {
   const [gender, setGender] = useState('');
   const [roommatePreference, setRoommatePreference] = useState('');
   const [briefDescription, setBriefDescription] = useState('');
+  const [imageURL, setImgURL] = useState('');
+
 
   // State for pets-related questions
   const [hasPets, setHasPets] = useState('');
@@ -48,6 +50,7 @@ const SignUpAndProfile: React.FC = () => {
       gender,
       roommatePreference,
       briefDescription,
+      imageURL,
       hasPets: hasPets === 'yes',
       mindsPets: mindsPets === 'yes',
       petType: hasPets === 'yes' ? petType : null,
@@ -310,6 +313,15 @@ const SignUpAndProfile: React.FC = () => {
                   onChange={(e) => setBriefDescription(e.target.value)}
                   className={styles.input3}
                   rows={4}
+                />
+
+                <label className={styles.label2}>Image URL:</label> 
+                <input
+                type="url"
+                value={imageURL}
+                onChange={(e) => setImgURL(e.target.value)}
+                className={styles.input2}
+                placeholder="Enter a profile picture."
                 />
 
               <div className={styles.buttonContainer}>
