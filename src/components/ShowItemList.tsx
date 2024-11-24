@@ -19,6 +19,7 @@ interface Item {
     hasPets: boolean;
     mindsPets: boolean;
     petType?: string;
+    imageURL: string;
     __v: string;
 }
 
@@ -44,11 +45,13 @@ export default function ShowItemsList() {
     }, []);
 
     return (
+        
         <div className={styles.usersContainer}> 
+        
             {items.map((item) => (
                 <Card key={item._id} className={styles.bigCard}> {/* Add the custom class for card */}
-                    <Image 
-                        src={'https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/3918298.png'} 
+                    <Image className={styles.pic}
+                        src={item.imageURL} 
                         alt={item.email} 
                         width={100} 
                         height={100}
@@ -57,7 +60,18 @@ export default function ShowItemsList() {
                     <div className={styles.innerCard}>
                         <div className={styles.userInfo}>
                             <h2>Name: {item.fName}</h2>
-                            <p>Description: {item.briefDescription}</p>
+                            <p>Email: {item.email}</p>
+                            <p>Gender: {item.gender}</p>
+                            <p>Rooming preference: {item.roommatePreference}</p>
+                            <p>Major: {item.major}</p>
+                            <p>Degree Level: {item.degreeLevel}</p>
+                            <p>Tidiness 1 - 4: {item.cleanliness}</p>
+                            <p>Do you own a pet: {item.hasPets}</p>
+                            <p>If so, what kind: {item.petType}</p>
+                            <p>Do you mind pets: {item.mindsPets}</p>
+                            <div className={styles.desc}>
+                                <p>Description: {item.briefDescription}</p>
+                            </div>
                         </div>
                         <button>
                             ADD

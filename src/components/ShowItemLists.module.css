@@ -7,14 +7,25 @@
     background-color: #f5f5f5;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    width: 180px;  /* Width of the card */
-    height: 250px; /* Height of the card */
+    width: 375px;  /* Width of the card */
+    height: 600px; /* Height of the card */
     margin: 10px;  /* Margin around each card */
     display: flex;
     flex-direction: column; /* Stack elements inside the card vertically */
     justify-content: space-between; /* Distribute space between child elements */
-    background-color: pink; /* Optional: pink background */
+    background-color: #fff; /* Optional: pink background */
     border: 2px solid #000;
+}
+
+.pic {
+  border-radius: 10px;
+  border: 2px solid #000;
+  margin: 2%;
+  width: 50%;
+  height: 30%;
+  max-width: 150px;
+  max-height: 120px;
+margin-top: 4%;
 }
 
 .bigCard:hover {
@@ -25,6 +36,11 @@
 .innerCard {
     margin-top: 16px;
     justify-content: space-between;
+    height:80%;
+    font-size:85%;
+    line-height:1;
+    text-align:center;
+    
   }
   
   .userInfo {
@@ -41,7 +57,41 @@
     align-items: center; /* Center users vertically if needed */
     display: flex;          /* Flexbox layout for horizontal stacking */
     flex-wrap: wrap;        /* Wrap cards to the next line when the row is full */
-    justify-content: flex-start; /* Align items to the left */
+    justify-content: center; /* Align items to the left */
     gap: 1rem;              /* Add spacing between the cards */
-    margin-top: 20px;       /* Optional: Adds spacing from the top */
+    margin-top: 1%;       /* Optional: Adds spacing from the top */
+    background-color:#ccc;
+    border: 2px solid #000;
+    border-radius: 20px;
+
+    margin-left: 8%;
+    margin-right: 4%;
   } 
+
+  .desc {
+    border: 2px solid #000;
+    border-radius: 20px;
+    width: 100%; /* Takes the full width of the parent container */
+    text-align: left; /* Align text to the left */
+    padding: 8px; /* Add some inner spacing */
+    margin-top: 8px; /* Add spacing from elements above */
+    box-sizing: border-box; /* Ensure padding is included in the width */
+  }
+
+  .upperCard {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Three columns */
+    grid-template-rows: auto; /* Rows will adjust dynamically */
+    gap: 2%;
+    border: 2px solid #000;
+    padding: 1%;
+    width: 84%;
+    height: 80%;
+    margin-left: 8%;
+    margin-top: 3%;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color: #c0c0c0;
+    align-items: center; /* Center items vertically if needed */
+    min-height: 250px; /* Set a default space when empty */
+  }
