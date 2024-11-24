@@ -85,3 +85,17 @@
     color: black !important;
 }
 
+/************************/
+/* Fix Spacing on items */
+/************************/
+
+@import url('https://fonts.googleapis.com/css2?family=Baskervville+SC&family=Kiwi+Maru&display=swap');
+
+.nav-link span {
+    font-family: 'Kiwi Maru', serif;
+    margin-top: 8px;
+    color: white;
+    font-weight: 600;
+}
+
+/* line-height: */
