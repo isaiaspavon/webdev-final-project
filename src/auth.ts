@@ -37,6 +37,7 @@ export const{
                         id: user._id.toString(),
                         email: user.email,
                         name: user.fName,
+                        gender: user.gender,
                       };
 
                     } else {
@@ -48,10 +49,28 @@ export const{
                     return null;
                   }
                 } catch (error: any) {
-                  console.log("An error occurred: ", error);
                   return null;
                 }
               },
         }),
     ],
+
+    session: {
+      strategy: "jwt",
+    },
+    callbacks: {
+      async jwt({ token, user }) {
+        // Add user data to the token when available
+        if (user) {
+          token.id = user.id;
+        }
+        return token;
+      },
+      async session({ session, token }) {
+        // Attach token data to the session
+        session.user.id = token.id as string;
+        return session;
+      },
+    },
+
 });
