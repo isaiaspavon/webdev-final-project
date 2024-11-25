@@ -11,7 +11,9 @@ import Property from './propertyCard.tsx';
 const Container = () => {
     return (
         <div className="outside-card">
-
+        <div className="inside-card-2">
+            
+        </div>
         <div className="inside-card-1">
             <Property 
             imgSrc="https://www.thelodgeofathens.com/wp-content/uploads/2024/04/the-lodge-exterior-0003-1.jpg"
