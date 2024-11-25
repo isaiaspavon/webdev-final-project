@@ -3,6 +3,8 @@ import './ProfileCard.Module.css';
 import { getSession } from "next-auth/react";
 import HomePage from '../pages/Home';
 import { useSession } from "next-auth/react";
+import Image from "next/image";
+
 
 
 const CardContainer = () => {
@@ -54,7 +56,14 @@ const CardContainer = () => {
     <div className="big-card">
       <div className="left-card">
         <div className="Pfp-card">
-            <img src="https://i.redd.it/5wbwtwkesdpa1.jpg" alt="profile picture" className="profile-pic" />
+            <Image
+              className="profile-pic"
+              src={item.imageURL}
+              alt="User Profile Picture"
+              width={100}
+              height={100}
+              priority
+              />
         </div>
         <div className="desc-card">
         <p>{item.briefDescription}</p>
