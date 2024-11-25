@@ -114,3 +114,24 @@
 .Pfp-card {
   background-color: firebrick;
 }
+
+.top-right-card {
+  position: relative;
+  padding: 16px; /* Optional for spacing */
+}
+
+.top-right-card button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #BA0C2F;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.top-right-card button:hover {
+  background-color: #9E0A29;
+}

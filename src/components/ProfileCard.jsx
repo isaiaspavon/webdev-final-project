@@ -62,13 +62,12 @@ const CardContainer = () => {
       </div>
       <div className="right-cards">
         <div className="top-right-card">
-        <p>Name: {item.fName} {item.lName}</p>
+          <button onClick={() => handleEditItem(item)}>Edit</button>
+          <p>Name: {item.fName} {item.lName}</p>
           <p>Major: {item.major}</p>
           <p>Gender: {item?.gender || "Not Specified"}</p>
           <p>Roommate Preference: {item?.roommatePreference || "No Preference"}</p>
           <p>Degree Level: {item?.degreeLevel || "Not Specified"}</p>
-        </div>
-        <div className="bottom-right-card">
           <p>Pets: {item?.hasPets || "No Pets"}</p>
           <p>Pet Preferences: {item?.mindsPets || "No Preference"}</p>
           <p>Tidiness: {item?.cleanliness || "Not Specified"}</p>
