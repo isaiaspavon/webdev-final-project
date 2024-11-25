@@ -71,7 +71,10 @@ const CardContainer = () => {
       </div>
       <div className="right-cards">
         <div className="top-right-card">
-          <button onClick={() => handleEditItem(item)}>Edit</button>
+          <div className="buttonDiv">
+            <button className="editButton" onClick={() => handleEditItem(item)}>Edit Profile</button>
+            <button className="deleteButton" onClick={() => handleDeleteItem(item)}>Delete Profile</button>
+          </div>
           <p>Name: {item.fName} {item.lName}</p>
           <p>Major: {item.major}</p>
           <p>Gender: {item?.gender || "Not Specified"}</p>
