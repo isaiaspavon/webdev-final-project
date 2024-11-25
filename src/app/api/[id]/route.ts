@@ -1,10 +1,12 @@
 // Get information specific to an individual 
 
 import connectMongoDB from "@/libs/mongodb";
+import { ObjectId } from 'mongodb';
 import Item from "@/models/itemSchema";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import mongoose from "mongoose";
+import {User} from "@/models/UserSchema";
 
 // user id
 interface RouteParams {
@@ -13,9 +15,14 @@ interface RouteParams {
 
 // GET an item
 export async function GET(request:NextRequest, { params }: RouteParams) {
-    const { id } = params;
+    const { id } = await params;
+
+    let userId = id;
+    if (typeof id === 'string') {
+        userId = new ObjectId(id);
+    }
     await connectMongoDB();
-    const item = await Item.findOne({ _id: id});
+    const item = await User.findOne({ _id: userId});    
     return NextResponse.json({ item }, { status: 200});
 }
 
