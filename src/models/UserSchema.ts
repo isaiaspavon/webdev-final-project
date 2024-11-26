@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema<IUser>({
     hasPets: { type: String, required: false },
     mindsPets: { type: String, required: false },
     petType: { type: String, required: false },
-    imageURL: {type: String, required: false }
+    imageURL: {type: String, required: false },
 
 })
 
