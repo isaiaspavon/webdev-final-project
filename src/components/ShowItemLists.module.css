@@ -110,10 +110,11 @@ margin-top: 4%;
 .innerCard {
   background-color: #ffffff; /* White background */
   border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
   padding: 1.5rem; /* Padding inside the card */
-  max-width: 400px; /* Optional width constraint */
-  margin: auto; /* Center the card */
+  max-width: 275px; /* Optional width constraint */
+  max-height: 350px;
+  margin: auto ; /* Center the card */
 }
 
 .userInfo {
@@ -140,11 +141,17 @@ margin-top: 4%;
 }
 
 .desc {
-  border-top: 1px solid #e2e2e2; /* Top border for separation */
-  padding-top: 1rem; /* Spacing above the description */
+  border-top: 2.1px solid black; /* Top border for separation */
+  padding-top: .75rem; /* Spacing above the description */
+  max-height: 100px;
 }
 
 .desc p {
   color: #333333; /* Darker text for readability */
-  line-height: 1.5; /* Improve readability with line spacing */
+  line-height: 1.25; /* Improve readability with line spacing */
+  font-weight: 600;
+  margin: auto;
+  /*max-height: 250px; */
+  text-align: center;
+  max-width: 700px;
 }
