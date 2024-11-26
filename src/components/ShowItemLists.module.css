@@ -96,6 +96,55 @@ margin-top: 4%;
     min-height: 250px; /* Set a default space when empty */
   }
 
-  .userInfo h2 {
+  @import url('https://fonts.googleapis.com/css2?family=Baskervville+SC&family=Kiwi+Maru&display=swap');
+
+/* Chat GPT Shit ON GOD */
+
+.userInfo p {
+    font-family: 'Kiwi Maru', serif;
+    margin-top: 8px;
     color: black;
-  }
+    font-weight: 400;
+}
+
+.innerCard {
+  background-color: #ffffff; /* White background */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 1.5rem; /* Padding inside the card */
+  max-width: 400px; /* Optional width constraint */
+  margin: auto; /* Center the card */
+}
+
+.userInfo {
+  margin-bottom: 1rem;
+}
+
+.userInfo h2 {
+  font-size: 1.25rem; /* Slightly larger font */
+  font-weight: 600; /* Bold text */
+  margin-bottom: 0.5rem; /* Spacing below the name */
+}
+
+.userInfo p {
+  color: #4a4a4a; /* Gray text for less emphasis */
+  margin-bottom: 0.25rem; /* Spacing between lines */
+}
+
+.petInfo {
+  margin-top: 1rem;
+}
+
+.petInfo p {
+  margin-bottom: 0.5rem; /* Consistent spacing for pet info */
+}
+
+.desc {
+  border-top: 1px solid #e2e2e2; /* Top border for separation */
+  padding-top: 1rem; /* Spacing above the description */
+}
+
+.desc p {
+  color: #333333; /* Darker text for readability */
+  line-height: 1.5; /* Improve readability with line spacing */
+}
