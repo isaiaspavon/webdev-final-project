@@ -64,6 +64,12 @@ const handleCloseEditForm = () => {
   setEditingItemId(null); //close
 }
 
+//Handle delete 
+const handleDeleteItem = () => {
+  //delete user in database
+}
+
+
   return (
     <div className="big-card">
       <div className="left-card">
@@ -83,6 +89,7 @@ const handleCloseEditForm = () => {
       </div>
       <div className="right-cards">
         <div className="top-right-card">
+          
           <div className="buttonDiv">
             <button className="editButton" onClick={() => handleEditClick(item._id)}>Edit Profile</button>
             <button className="deleteButton" onClick={() => handleDeleteItem(item)}>Delete Profile</button>
