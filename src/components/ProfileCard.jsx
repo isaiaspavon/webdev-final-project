@@ -4,6 +4,7 @@ import { getSession } from "next-auth/react";
 import HomePage from '../pages/Home';
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import EditItemForm from './editButton';
 
 
 
@@ -11,6 +12,8 @@ const CardContainer = () => {
   const { data: session, status } = useSession();
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [editingItemId, setEditingItemId] = useState(null); // Track the item being edited
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -21,7 +24,6 @@ const CardContainer = () => {
             throw new Error(`Failed to fetch user data: ${response.status}`);
           }
           const data = await response.json();
-          console.log("User data:", data);
           setUserData(data);
         } catch (error) {
           console.error("Error fetching user data:", error);
@@ -52,6 +54,16 @@ const CardContainer = () => {
 
   const { item } = userData;
 
+//Handle edit
+const handleEditClick = (id) => {
+  setEditingItemId(id); //edit
+}
+
+//Handle close form click
+const handleCloseEditForm = () => {
+  setEditingItemId(null); //close
+}
+
   return (
     <div className="big-card">
       <div className="left-card">
@@ -72,7 +84,7 @@ const CardContainer = () => {
       <div className="right-cards">
         <div className="top-right-card">
           <div className="buttonDiv">
-            <button className="editButton" onClick={() => handleEditItem(item)}>Edit Profile</button>
+            <button className="editButton" onClick={() => handleEditClick(item._id)}>Edit Profile</button>
             <button className="deleteButton" onClick={() => handleDeleteItem(item)}>Delete Profile</button>
           </div>
           <p>Name: {item.fName} {item.lName}</p>
@@ -85,6 +97,14 @@ const CardContainer = () => {
           <p>Tidiness: {item?.cleanliness || "Not Specified"}</p>
         </div>
       </div>
+      {editingItemId && (
+        <div className="edit-form-overlay">
+          <EditItemForm
+            itemId={editingItemId}
+            onClose={handleCloseEditForm}
+          />
+        </div>
+      )}
     </div>
   );
 };
