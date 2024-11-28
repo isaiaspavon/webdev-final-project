@@ -5,6 +5,8 @@ import HomePage from '../pages/Home';
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import EditItemForm from './editButton';
+import DeleteButtonComponent from './deleteButton';  // Import the DeleteButtonComponent
+
 
 
 
@@ -13,6 +15,8 @@ const CardContainer = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editingItemId, setEditingItemId] = useState(null); // Track the item being edited
+  const [deletingItemId, setDeletingItemId] = useState(null); // Track the item being deleted
+
 
 
   useEffect(() => {
@@ -64,10 +68,23 @@ const handleCloseEditForm = () => {
   setEditingItemId(null); //close
 }
 
-//Handle delete 
-const handleDeleteItem = () => {
-  //delete user in database
-}
+// Handle Delete item operation
+const handleDeleteItem = async (id) => {
+  try {
+    const response = await fetch(`/api/items/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      //setItems(items.filter(item => item._id !== id)); // Update the state to remove the deleted item
+      setDeletingItemId(null); // Close the modal
+    } else {
+      console.log('Failed to delete item');
+    }
+  } catch (error) {
+    console.error('Error deleting item:', error);
+  }
+};
 
 
   return (
@@ -92,7 +109,10 @@ const handleDeleteItem = () => {
           
           <div className="buttonDiv">
             <button className="editButton" onClick={() => handleEditClick(item._id)}>Edit Profile</button>
-            <button className="deleteButton" onClick={() => handleDeleteItem(item)}>Delete Profile</button>
+            <DeleteButtonComponent
+            id={item._id}
+            onDelete={handleDeleteItem}
+             />
           </div>
           <p>Name: {item.fName} {item.lName}</p>
           <p>Major: {item.major}</p>
@@ -110,6 +130,28 @@ const handleDeleteItem = () => {
             itemId={editingItemId}
             onClose={handleCloseEditForm}
           />
+        </div>
+      )}
+
+      {deletingItemId && (
+        <div className="delete-confirmation-overlay">
+          <div className="delete-confirmation-modal">
+            <h3>Are you sure you want to delete this item?</h3>
+            <div className="modal-actions">
+              <button
+                onClick={() => handleDeleteItem(deletingItemId)}
+                className="confirm-delete"
+              >
+                Yes, Delete
+              </button>
+              <button
+                onClick={() => setDeletingItemId(null)}
+                className="cancel-delete"
+              >
+                No, Cancel
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
