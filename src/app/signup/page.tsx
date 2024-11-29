@@ -54,6 +54,7 @@ const SignUpAndProfile: React.FC = () => {
       hasPets: hasPets === 'yes',
       mindsPets: mindsPets === 'yes',
       petType: hasPets === 'yes' ? petType : null,
+      roommates: [],
     };
 
     try {

@@ -10,18 +10,6 @@ interface RouteParams {
 }
 
 // GET: Fetch all profiles
-// export async function GET() {
-//     await connectMongoDB();
-//     try {
-//         const users = await User.find();
-//         return NextResponse.json({ success: true, data: users }, { status: 200 });
-//     } catch (error) {
-//         console.error("Error fetching profiles:", error); // Log the error for debugging
-//         return NextResponse.json({ success: false, message: "Error fetching profiles" }, { status: 500 });
-//     }
-// }
-
-// GET: Fetch all profiles
 export async function GET() {
     await connectMongoDB();
     try {
@@ -49,8 +37,11 @@ export async function POST(request: NextRequest) {
         hasPets,
         mindsPets,
         petType,
-        imageURL
+        imageURL,
+        roommates
     } = await request.json();
+
+    
 
     await connectMongoDB();
 
@@ -70,7 +61,8 @@ export async function POST(request: NextRequest) {
             hasPets,
             mindsPets,
             petType: hasPets ? petType : null, // Only include petType if the user has pets
-            imageURL
+            imageURL,
+            roommates: roommates || [],
         });
 
         return NextResponse.json({ success: true, data: newUser, message: "Profile added successfully" }, { status: 201 });

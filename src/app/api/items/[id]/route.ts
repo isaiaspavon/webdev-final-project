@@ -37,11 +37,11 @@ export async function PUT(request: NextRequest, context: RouteParams) {
        return NextResponse.json({ message: "Invalid ID format" }, { status: 400 });
    }
 
-   const { fName, lName, email, major, cleanliness, degreeLevel, gender, roommatePreference, briefDescription, hasPets, mindsPets, petType, imageURL } = await request.json();
+   const { fName, lName, email, major, cleanliness, degreeLevel, gender, roommatePreference, briefDescription, hasPets, mindsPets, petType, imageURL, roommates } = await request.json();
 
    await connectMongoDB();
 
-   const updatedItem = await User.findByIdAndUpdate(id, { fName, lName, email, major, cleanliness, degreeLevel, gender, roommatePreference, briefDescription, hasPets, mindsPets, petType, imageURL }, { new: true });
+   const updatedItem = await User.findByIdAndUpdate(id, { fName, lName, email, major, cleanliness, degreeLevel, gender, roommatePreference, briefDescription, hasPets, mindsPets, petType, imageURL, roommates }, { new: true });
 
    if (!updatedItem) {
        return NextResponse.json({ message: "Item not found or update failed" }, { status: 404 });

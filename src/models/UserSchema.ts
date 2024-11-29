@@ -15,6 +15,7 @@ export interface IUser extends Document {
     mindsPets: string;
     petType?: string; // Optional if user doesn't have pets
     imageURL : string;
+    roommates : mongoose.Types.Array<mongoose.Types.ObjectId>;
 }
 
 const userSchema = new mongoose.Schema<IUser>({
@@ -32,8 +33,11 @@ const userSchema = new mongoose.Schema<IUser>({
     mindsPets: { type: String, required: false },
     petType: { type: String, required: false },
     imageURL: {type: String, required: false },
-
-})
+    roommates: { 
+        type: [mongoose.Schema.Types.ObjectId], 
+        ref: "User", 
+        default: [] 
+    }})
 
 export const User = mongoose.models.User ?? mongoose.model("User", userSchema);
 export default User;

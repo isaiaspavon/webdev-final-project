@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './ProfileCard.Module.css'; 
-import { getSession } from "next-auth/react";
-import HomePage from '../pages/Home';
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import EditItemForm from './editButton';
 import DeleteButtonComponent from './deleteButton';  // Import the DeleteButtonComponent
+import { SessionProvider } from "next-auth/react";
 
 
 

@@ -3,6 +3,10 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import Image from "next/image";
 import styles from './ShowItemLists.module.css';
+import { useSession } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
+import { User } from "../models/UserSchema"; // Adjust path as necessary
+import AddButtonComponent from './addButton';
 
 interface Item {
     _id: string;
@@ -24,8 +28,11 @@ interface Item {
 }
 
 export default function ShowItemsList() {
+    //const { data: session } = useSession();
+    //const { data: session, status } = useSession();
     const [items, setItems] = useState<Item[]>([]); // State for available items
     const [addedItems, setAddedItems] = useState<Item[]>([]); // State for added items (multiple)
+
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -44,13 +51,24 @@ export default function ShowItemsList() {
         fetchItems();
     }, []);
 
-    // Function to handle adding an item
-    const handleAddItem = (item: Item) => {
-        // Remove the item from the main list
-        setItems((prevItems) => prevItems.filter((i) => i._id !== item._id));
-        // Add the item to the addedItems array (maintain previous items)
-        setAddedItems((prevAddedItems) => [...prevAddedItems, item]);
-    };
+    // Function to handle adding a user to roommates
+    const handleAddItem = async (id: string) => {
+    try {
+      const response = await fetch(`/api/roommates/${id}`, {
+        method: 'POST', // Ensure your backend is configured for this
+      });
+  
+      if (response.ok) {
+        const updatedUser = await response.json();
+        setItems((prevItems) => prevItems.filter((item) => item._id !== id));
+        setAddedItems((prevAddedItems) => [...prevAddedItems, updatedUser]);
+      } else {
+        console.log('Failed to add roommate');
+      }
+    } catch (error) {
+      console.error('Error adding roommate:', error);
+    }
+  };
 
     // Function to handle removing an item
     const handleRemoveItem = (item: Item) => {
@@ -134,8 +152,8 @@ export default function ShowItemsList() {
                                     <p>Description: {item.briefDescription}</p>
                                 </div>
                             </div>
-                            <button onClick={() => handleAddItem(item)}>ADD</button>
-                        </div>
+                            <AddButtonComponent id={item._id} onAdd={handleAddItem} />
+                            </div>
                     </Card>
                 ))}
             </div>

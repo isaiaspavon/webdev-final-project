@@ -1,20 +1,17 @@
-// src/pages/Home.tsx
 'use client';
+
 import React from 'react';
 import { SessionProvider } from 'next-auth/react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navigation from '../components/Navigation'; // Nav
+import ProfileCard from '../components/ProfileCard'; // Card
 
-//components
-import Navigation from '../components/Navigation.jsx'; //nav
-import ProfileCard from '../components/ProfileCard.jsx'; //card
-
-const Home: React.FC = (component, pageProps) => {
+const Home: React.FC = () => {
   return (
-    <SessionProvider session={pageProps.session}>
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <Navigation /> {/* Navigation Bar */}
-      <ProfileCard />
-    </div>
+    <SessionProvider>
+      <div className="flex items-center justify-center h-screen bg-gray-100">
+        <Navigation /> {/* Navigation Bar */}
+        <ProfileCard /> {/* Profile Card */}
+      </div>
     </SessionProvider>
   );
 };
