@@ -15,6 +15,7 @@
     justify-content: space-between; /* Distribute space between child elements */
     background-color: #fff; /* Optional: pink background */
     border: 2px solid #000;
+    max-width: 300px;
 }
 
 .pic {
@@ -48,25 +49,17 @@ margin-top: 4%;
   }
 
 
-.usersContainer {
-    /* display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2%;
-    align-items: center; /* Center users vertically if needed */
-    display: flex;          /* Flexbox layout for horizontal stacking */
-    flex-wrap: wrap;        /* Wrap cards to the next line when the row is full */
-    justify-content: center; /* Align items to the left */
-    gap: 1rem;              /* Add spacing between the cards */
-    margin-top: 1%;       /* Optional: Adds spacing from the top */
-    background-color:#ccc;
+  .usersContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* Creates 3 equal-width columns */
+    grid-gap: 1rem;                       /* Adds space between items */
+    margin-top: 1%;                       /* Optional: Adds spacing from the top */
+    background-color: #ccc;
     border: 2px solid #000;
     border-radius: 20px;
-
     margin-left: 8%;
     margin-right: 4%;
-  } 
+}
 
   .desc {
     border: 2px solid #000;
@@ -88,7 +81,7 @@ margin-top: 4%;
     width: 88%;
     height: 80%;
     margin-left: 8%;
-    margin-top: 3%;
+    margin-top: 0%;
     box-sizing: border-box;
     border-radius: 20px;
     background-color: #c0c0c0;
@@ -154,4 +147,25 @@ margin-top: 4%;
   /*max-height: 250px; */
   text-align: center;
   max-width: 700px;
+}
+
+
+
+.upperCardlabel {
+    font-size: 1.5rem;  /* Adjust the size of the label */
+    font-weight: bold;  /* Make the label bold */
+    text-align: center;  /* Center the label */
+    width: 100%;  /* Ensure it takes up the full width of the parent container */
+    margin-bottom: 00px;  /* Space between the label and cards */
+    display: block;  /* Make it a block element so it spans full width */
+}
+
+.lowerCardlabel {
+  font-size: 1.5rem;  /* Adjust the size of the label */
+  font-weight: bold;  /* Make the label bold */
+  text-align: center;  /* Center the label */
+  width: 100%;  /* Ensure it takes up the full width of the parent container */
+  margin-bottom: 0px;  /* Space between the label and cards */
+  display: block;  /* Make it a block element so it spans full width */
+  margin-top: 20px;
 }

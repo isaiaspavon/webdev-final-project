@@ -79,30 +79,25 @@ export default function ShowItemsList() {
                 const response = await fetch('/api/items');
                 if (!response.ok) throw new Error('Failed to fetch all users');
                 const data = await response.json();
+                
+                // Filter out the current user and already added roommates
+                const filteredUsers = data.items.filter((user: Item) => {
+                    return user._id !== session?.user?.id && !addedItems.some(addedItem => addedItem._id === user._id);
+                });
 
-                // Filter out already added roommates from the available users
-                const availableUsers = data.items.filter(
-                    (item: Item) => !addedItems.some(addedItem => addedItem._id === item._id)
-                );
-                setItems(availableUsers);
+                setItems(filteredUsers);
             } catch (error) {
                 console.error('Error fetching users:', error);
             }
         };
 
         fetchAllUsers();
-    }, [addedItems]); // Re-fetch when `addedItems` change
+    }, [session, addedItems]);
 
     // Add a roommate
     const handleAddItem = async (item: Item) => {
         if (session?.user?.id) {
             try {
-                // Prevent adding duplicates
-                if (addedItems.some((addedItem) => addedItem._id === item._id)) {
-                    console.log('This roommate is already added.');
-                    return;
-                }
-
                 setItems((prevItems) => prevItems.filter((i) => i._id !== item._id));
                 setAddedItems((prevAddedItems) => [...prevAddedItems, item]);
 
@@ -145,6 +140,7 @@ export default function ShowItemsList() {
 
     return (
         <div>
+            <label className={styles.upperCardlabel}>Current Roommates</label>
             <div className={styles.upperCard}>
                 {loading ? (
                     <p>Loading roommates...</p>
@@ -188,6 +184,7 @@ export default function ShowItemsList() {
                     <p>No roommates added yet.</p>
                 )}
             </div>
+            <label className={styles.lowerCardlabel}>Users Looking for Roommates</label>
             <div className={styles.usersContainer}>
                 {items.map((item) => (
                     <Card key={item._id} className={styles.bigCard}>
