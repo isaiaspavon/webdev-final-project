@@ -29,42 +29,53 @@ export default function ShowItemsList() {
     const [addedItems, setAddedItems] = useState<Item[]>([]); // Roommates for current user
     const [loading, setLoading] = useState(true); // Loading state
 
+    // Fetch roommates for the current user
     useEffect(() => {
         const fetchRoommates = async () => {
             if (!session?.user?.id) return;
-
+        
             try {
-                // Fetch the current user's data
                 const response = await fetch(`/api/${session.user.id}`);
                 if (!response.ok) throw new Error('Failed to fetch user data');
                 const userData = await response.json();
-
-                const roommateIDs = userData.roommates || []; // Assume `roommates` is an array of IDs
+        
+                console.log('Fetched user data:', userData);
+        
+                const roommateIDs = Array.isArray(userData.item?.roommates) ? userData.item.roommates : [];
                 console.log('Roommate IDs:', roommateIDs);
-
-                // Fetch roommate details for each ID
-                const roommatePromises = roommateIDs.map((id: string) =>
-                    fetch(`/api/roommate/${id}`).then((res) => {
-                        if (!res.ok) throw new Error(`Failed to fetch roommate data for ID: ${id}`);
-                        return res.json();
-                    })
-                );
-
-                const roommateDetails = await Promise.all(roommatePromises);
-                setAddedItems(roommateDetails);
+        
+                if (roommateIDs.length > 0) {
+                    const roommatePromises = roommateIDs.map((id: string) =>
+                        fetch(`/api/roommate/${id}`).then((res) => {
+                            if (!res.ok) throw new Error(`Failed to fetch roommate data for ID: ${id}`);
+                            return res.json();
+                        })
+                    );
+        
+                    const roommateResponses = await Promise.all(roommatePromises);
+                    console.log('Fetched roommate details:', roommateResponses);
+        
+                    // Extract the `data` field from each response
+                    const roommateDetails = roommateResponses.map((response) => response.data);
+                    setAddedItems(roommateDetails);
+                } else {
+                    console.error('No roommates found for this user.');
+                }
             } catch (error) {
                 console.error('Error fetching roommates:', error);
             } finally {
                 setLoading(false);
             }
         };
-
+        
+    
         if (status === 'authenticated') {
             fetchRoommates();
         }
     }, [session, status]);
+    
 
-    // Fetch all users for adding roommates (if needed)
+    // Fetch all users
     useEffect(() => {
         const fetchAllUsers = async () => {
             try {
@@ -80,7 +91,7 @@ export default function ShowItemsList() {
         fetchAllUsers();
     }, []);
 
-    // Add or remove roommate logic remains unchanged
+    // Add a user to the roommate list
     const handleAddItem = async (item: Item) => {
         if (session?.user?.id) {
             try {
@@ -90,7 +101,7 @@ export default function ShowItemsList() {
                 const response = await fetch(`/api/roommate/${session.user.id}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ Roommate: [item._id] }),
+                    body: JSON.stringify({ roommates: [item._id] }),
                 });
 
                 if (!response.ok) throw new Error('Failed to update user roommates');
@@ -100,8 +111,8 @@ export default function ShowItemsList() {
         }
     };
 
-    // Handle removing a user from roommates
-    const handleRemoveItem = (item: Item) => {
+    // Remove a user from the roommate list
+    const handleRemoveItem = async (item: Item) => {
         setAddedItems((prevAddedItems) => prevAddedItems.filter((i) => i._id !== item._id));
         setItems((prevItems) => [...prevItems, item]);
     };
