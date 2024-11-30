@@ -27,13 +27,49 @@ export async function GET(request:NextRequest, { params }: RouteParams) {
 }
 
 // PUT an item
-export async function PUT(request:NextRequest, { params }: RouteParams) {
-    const { id } = params;
-    const { title: title, description: description, image: image } = await request.json();
-    await connectMongoDB();
-    await Item.findByIdAndUpdate(id, { title, description, image});
-    return NextResponse.json({ message: "Item updated" }, { status: 200});
-}
+export async function PUT(request: NextRequest, { params }: RouteParams) {
+    const { id } = await params;
+  
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ success: false, message: "Invalid ID format" }, { status: 400 });
+    }
+  
+    let body;
+    try {
+      body = await request.json();
+      console.log("Request body:", body);
+    } catch (err) {
+      console.error("Error parsing JSON:", err);
+      return NextResponse.json({ success: false, message: "Invalid JSON payload" }, { status: 400 });
+    }
+  
+    if (!body || !Array.isArray(body.Roommate)) {
+      return NextResponse.json({ success: false, message: "Roommate field must be an array" }, { status: 400 });
+    }
+  
+    try {
+      await connectMongoDB();
+  
+      const updatedUser = await User.findByIdAndUpdate(
+        id,
+        { $push: { roommates: body.Roommate } }, // Update the array directly
+        { new: true } // Return the updated document
+      );
+  
+      if (!updatedUser) {
+        return NextResponse.json({ success: false, message: "User not found" }, { status: 404 });
+      }
+  
+      console.log("Updated user:", updatedUser);
+      return NextResponse.json({ success: true, data: updatedUser, message: "Roommate added/updated successfully" }, { status: 200 });
+    } catch (error) {
+      console.error("Error updating user:", error);
+      return NextResponse.json({ success: false, message: "Internal server error" }, { status: 500 });
+    }
+  }
+  
+
+
 
 
 // DELETE an item

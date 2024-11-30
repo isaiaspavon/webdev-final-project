@@ -29,27 +29,34 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
  
 
 // PUT (update) an item by id
-export async function PUT(request: NextRequest, context: RouteParams) {
-   const { id } = await context.params; // Make sure to await the params object
+// PUT (update) an item by id
+export async function PUT(request: NextRequest, { params }: RouteParams) {
+    const { id } = params;
 
-   // Validate ObjectId before proceeding with the update
-   if (!mongoose.Types.ObjectId.isValid(id)) {
-       return NextResponse.json({ message: "Invalid ID format" }, { status: 400 });
-   }
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return NextResponse.json({ message: "Invalid ID format" }, { status: 400 });
+    }
 
-   const { fName, lName, email, major, cleanliness, degreeLevel, gender, roommatePreference, briefDescription, hasPets, mindsPets, petType, imageURL, roommates } = await request.json();
+    try {
+        const updateData = await request.json(); // Fetch the update data
+        await connectMongoDB();
 
-   await connectMongoDB();
+        const updatedItem = await User.findByIdAndUpdate(
+            id,
+            updateData, // Pass the updateData directly
+            { new: true } // Return the updated document
+        );
 
-   const updatedItem = await User.findByIdAndUpdate(id, { fName, lName, email, major, cleanliness, degreeLevel, gender, roommatePreference, briefDescription, hasPets, mindsPets, petType, imageURL, roommates }, { new: true });
+        if (!updatedItem) {
+            return NextResponse.json({ message: "Item not found or update failed" }, { status: 404 });
+        }
 
-   if (!updatedItem) {
-       return NextResponse.json({ message: "Item not found or update failed" }, { status: 404 });
-   }
-
-   return NextResponse.json({ message: "Item updated successfully", updatedItem }, { status: 200 });
+        return NextResponse.json({ message: "Item updated successfully", updatedItem }, { status: 200 });
+    } catch (error) {
+        console.error("Error updating item:", error);
+        return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+    }
 }
-
 // DELETE an item by id
 export async function DELETE(request: NextRequest, context: RouteParams) {
    const { id } = await context.params; // Make sure to await the params object
@@ -68,3 +75,4 @@ export async function DELETE(request: NextRequest, context: RouteParams) {
 
    return NextResponse.json({ message: "Item deleted successfully" }, { status: 200 });
 }
+

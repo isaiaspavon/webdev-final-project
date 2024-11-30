@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
 import { User } from "../models/UserSchema"; // Adjust path as necessary
 import AddButtonComponent from './addButton';
+import mongoose from "mongoose";
 
 interface Item {
     _id: string;
@@ -24,10 +25,12 @@ interface Item {
     mindsPets: string;
     petType?: string;
     imageURL: string;
-    __v: string;
+    roommate: mongoose.Types.Array<mongoose.Types.ObjectId>;
 }
 
 export default function ShowItemsList() {
+    const { data: session, status } = useSession();
+    const [userData, setUserData] = useState(null);
     //const { data: session } = useSession();
     //const { data: session, status } = useSession();
     const [items, setItems] = useState<Item[]>([]); // State for available items
@@ -51,24 +54,44 @@ export default function ShowItemsList() {
         fetchItems();
     }, []);
 
-    // Function to handle adding a user to roommates
-    const handleAddItem = async (id: string) => {
-    try {
-      const response = await fetch(`/api/roommates/${id}`, {
-        method: 'POST', // Ensure your backend is configured for this
-      });
-  
-      if (response.ok) {
-        const updatedUser = await response.json();
-        setItems((prevItems) => prevItems.filter((item) => item._id !== id));
-        setAddedItems((prevAddedItems) => [...prevAddedItems, updatedUser]);
-      } else {
-        console.log('Failed to add roommate');
-      }
-    } catch (error) {
-      console.error('Error adding roommate:', error);
+// Function to handle adding a user to roommates
+// Function to handle adding a user to roommates
+const handleAddItem = async (item: Item) => {
+    if (session?.user?.id) {
+        try {
+            setItems((prevItems) => prevItems.filter((i) => i._id !== item._id));
+            // Add the item to the addedItems array (maintain previous items)
+            setAddedItems((prevAddedItems) => [...prevAddedItems, item]);
+
+
+            console.log(`Adding roommate with ID: ${item._id}`);
+            const roommate = [item._id];
+            const response = await fetch(`/api/${session.user.id}`, {
+                method: 'PUT', // Ensure your backend supports this method
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ Roommate: roommate }), // Send the Roommate field in the body
+            });
+
+            if (response.ok) {
+                const updatedUser = await response.json();
+
+                // Fetch the full roommate details of the added user
+                const roommateDetailsResponse = await fetch(`/api/items/${item._id}`);
+                if (!roommateDetailsResponse.ok) {
+                    throw new Error('Failed to fetch roommate details');
+                }
+                const roommateDetails = await roommateDetailsResponse.json();
+            } else {
+                const errorDetails = await response.json();
+                console.error("Failed to update roommate:", errorDetails);
+            }
+        } catch (error) {
+            console.error('Error adding roommate:', error);
+        }
     }
-  };
+};
 
     // Function to handle removing an item
     const handleRemoveItem = (item: Item) => {
@@ -152,7 +175,7 @@ export default function ShowItemsList() {
                                     <p>Description: {item.briefDescription}</p>
                                 </div>
                             </div>
-                            <AddButtonComponent id={item._id} onAdd={handleAddItem} />
+                            <button onClick={() => handleAddItem(item)}>ADD</button>
                             </div>
                     </Card>
                 ))}
