@@ -1,20 +1,16 @@
 'use client';
-import React, { useEffect, useState } from "react";
-import Card from "./Card";
-import Image from "next/image";
+
+import React, { useEffect, useState } from 'react';
+import Card from './Card';
+import Image from 'next/image';
 import styles from './ShowItemLists.module.css';
-import { useSession } from "next-auth/react";
-import { SessionProvider } from "next-auth/react";
-import { User } from "../models/UserSchema"; // Adjust path as necessary
-import AddButtonComponent from './addButton';
-import mongoose from "mongoose";
+import { useSession } from 'next-auth/react';
 
 interface Item {
     _id: string;
     fName: string;
     lName: string;
     email: string;
-    password: string;
     major: string;
     cleanliness: string;
     degreeLevel: string;
@@ -25,82 +21,91 @@ interface Item {
     mindsPets: string;
     petType?: string;
     imageURL: string;
-    roommate: mongoose.Types.Array<mongoose.Types.ObjectId>;
 }
 
 export default function ShowItemsList() {
     const { data: session, status } = useSession();
-    const [userData, setUserData] = useState(null);
-    //const { data: session } = useSession();
-    //const { data: session, status } = useSession();
-    const [items, setItems] = useState<Item[]>([]); // State for available items
-    const [addedItems, setAddedItems] = useState<Item[]>([]); // State for added items (multiple)
-
+    const [items, setItems] = useState<Item[]>([]); // All available users
+    const [addedItems, setAddedItems] = useState<Item[]>([]); // Roommates for current user
+    const [loading, setLoading] = useState(true); // Loading state
 
     useEffect(() => {
-        const fetchItems = async () => {
+        const fetchRoommates = async () => {
+            if (!session?.user?.id) return;
+
             try {
-                const response = await fetch('/api/items');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                setItems(data.items);
+                // Fetch the current user's data
+                const response = await fetch(`/api/${session.user.id}`);
+                if (!response.ok) throw new Error('Failed to fetch user data');
+                const userData = await response.json();
+
+                const roommateIDs = userData.roommates || []; // Assume `roommates` is an array of IDs
+                console.log('Roommate IDs:', roommateIDs);
+
+                // Fetch roommate details for each ID
+                const roommatePromises = roommateIDs.map((id: string) =>
+                    fetch(`/api/roommate/${id}`).then((res) => {
+                        if (!res.ok) throw new Error(`Failed to fetch roommate data for ID: ${id}`);
+                        return res.json();
+                    })
+                );
+
+                const roommateDetails = await Promise.all(roommatePromises);
+                setAddedItems(roommateDetails);
             } catch (error) {
-                console.log('Error from ShowItemList', error);
+                console.error('Error fetching roommates:', error);
+            } finally {
+                setLoading(false);
             }
         };
 
-        fetchItems();
+        if (status === 'authenticated') {
+            fetchRoommates();
+        }
+    }, [session, status]);
+
+    // Fetch all users for adding roommates (if needed)
+    useEffect(() => {
+        const fetchAllUsers = async () => {
+            try {
+                const response = await fetch('/api/items');
+                if (!response.ok) throw new Error('Failed to fetch all users');
+                const data = await response.json();
+                setItems(data.items);
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        };
+
+        fetchAllUsers();
     }, []);
 
-// Function to handle adding a user to roommates
-// Function to handle adding a user to roommates
-const handleAddItem = async (item: Item) => {
-    if (session?.user?.id) {
-        try {
-            setItems((prevItems) => prevItems.filter((i) => i._id !== item._id));
-            // Add the item to the addedItems array (maintain previous items)
-            setAddedItems((prevAddedItems) => [...prevAddedItems, item]);
+    // Add or remove roommate logic remains unchanged
+    const handleAddItem = async (item: Item) => {
+        if (session?.user?.id) {
+            try {
+                setItems((prevItems) => prevItems.filter((i) => i._id !== item._id));
+                setAddedItems((prevAddedItems) => [...prevAddedItems, item]);
 
+                const response = await fetch(`/api/roommate/${session.user.id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ Roommate: [item._id] }),
+                });
 
-            console.log(`Adding roommate with ID: ${item._id}`);
-            const roommate = [item._id];
-            const response = await fetch(`/api/${session.user.id}`, {
-                method: 'PUT', // Ensure your backend supports this method
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ Roommate: roommate }), // Send the Roommate field in the body
-            });
-
-            if (response.ok) {
-                const updatedUser = await response.json();
-
-                // Fetch the full roommate details of the added user
-                const roommateDetailsResponse = await fetch(`/api/items/${item._id}`);
-                if (!roommateDetailsResponse.ok) {
-                    throw new Error('Failed to fetch roommate details');
-                }
-                const roommateDetails = await roommateDetailsResponse.json();
-            } else {
-                const errorDetails = await response.json();
-                console.error("Failed to update roommate:", errorDetails);
+                if (!response.ok) throw new Error('Failed to update user roommates');
+            } catch (error) {
+                console.error('Error adding roommate:', error);
             }
-        } catch (error) {
-            console.error('Error adding roommate:', error);
         }
-    }
-};
+    };
 
-    // Function to handle removing an item
+    // Handle removing a user from roommates
     const handleRemoveItem = (item: Item) => {
         setAddedItems((prevAddedItems) => prevAddedItems.filter((i) => i._id !== item._id));
-        // Add the item back to the main list (items available for adding)
         setItems((prevItems) => [...prevItems, item]);
     };
 
-    // Function to handle sending an email
     const handleEmail = (email: string) => {
         window.location.href = `mailto:${email}`;
     };
@@ -108,46 +113,48 @@ const handleAddItem = async (item: Item) => {
     return (
         <div>
             <div className={styles.upperCard}>
-                {/* Map through the addedItems array to display all added items */}
-                {addedItems.map((addedItem) => (
-                    <Card key={addedItem._id} className={styles.bigCard}>
-                        <Image
-                            className={styles.pic}
-                            src={addedItem.imageURL}
-                            alt={addedItem.email}
-                            width={100}
-                            height={100}
-                            priority
-                        />
-                        <div className={styles.innerCard}>
-                            <div className={styles.userInfo}>
-                                <h2>Name: {addedItem.fName}</h2>
-                                <p>Email: {addedItem.email}</p>
-                                <p>Gender: {addedItem.gender}</p>
-                                <p>Rooming preference: {addedItem.roommatePreference}</p>
-                                <p>Major: {addedItem.major}</p>
-                                <p>Degree Level: {addedItem.degreeLevel}</p>
-                                <p>Tidiness 1 - 4: {addedItem.cleanliness}</p>
-                                <p>Do you own a pet: {addedItem.hasPets}</p>
-                                <p>If so, what kind: {addedItem.petType}</p>
-                                <p>Do you mind pets: {addedItem.mindsPets}</p>
-                                <div className={styles.desc}>
-                                    <p>Description: {addedItem.briefDescription}</p>
+                {loading ? (
+                    <p>Loading roommates...</p>
+                ) : addedItems.length > 0 ? (
+                    addedItems.map((addedItem) => (
+                        <Card key={addedItem._id} className={styles.bigCard}>
+                            <Image
+                                className={styles.pic}
+                                src={addedItem.imageURL}
+                                alt={addedItem.email}
+                                width={100}
+                                height={100}
+                                priority
+                            />
+                            <div className={styles.innerCard}>
+                                <div className={styles.userInfo}>
+                                    <h2>Name: {addedItem.fName} {addedItem.lName}</h2>
+                                    <p>Email: {addedItem.email}</p>
+                                    <p>Gender: {addedItem.gender}</p>
+                                    <p>Rooming Preference: {addedItem.roommatePreference}</p>
+                                    <p>Major: {addedItem.major}</p>
+                                    <p>Degree Level: {addedItem.degreeLevel}</p>
+                                    <p>Tidiness (1 - 4): {addedItem.cleanliness}</p>
+                                    <p>Has Pets: {addedItem.hasPets}</p>
+                                    {addedItem.petType && <p>Pet Type: {addedItem.petType}</p>}
+                                    <p>Minds Pets: {addedItem.mindsPets}</p>
+                                    <div className={styles.desc}>
+                                        <p>Description: {addedItem.briefDescription}</p>
+                                    </div>
                                 </div>
+                                <button onClick={() => handleRemoveItem(addedItem)} className={styles.removeButton}>
+                                    Remove
+                                </button>
+                                <button onClick={() => handleEmail(addedItem.email)} className={styles.emailButton}>
+                                    Email
+                                </button>
                             </div>
-                            {/* Remove button */}
-                            <button onClick={() => handleRemoveItem(addedItem)} className={styles.removeButton}>
-                                Remove
-                            </button>
-                            {/* Email button */}
-                            <button onClick={() => handleEmail(addedItem.email)} className={styles.emailButton}>
-                                Email
-                            </button>
-                        </div>
-                    </Card>
-                ))}
+                        </Card>
+                    ))
+                ) : (
+                    <p>No roommates added yet.</p>
+                )}
             </div>
-
             <div className={styles.usersContainer}>
                 {items.map((item) => (
                     <Card key={item._id} className={styles.bigCard}>
@@ -161,22 +168,24 @@ const handleAddItem = async (item: Item) => {
                         />
                         <div className={styles.innerCard}>
                             <div className={styles.userInfo}>
-                                <h2>Name: {item.fName}</h2>
+                                <h2>Name: {item.fName} {item.lName}</h2>
                                 <p>Email: {item.email}</p>
                                 <p>Gender: {item.gender}</p>
-                                <p>Rooming preference: {item.roommatePreference}</p>
+                                <p>Rooming Preference: {item.roommatePreference}</p>
                                 <p>Major: {item.major}</p>
                                 <p>Degree Level: {item.degreeLevel}</p>
-                                <p>Tidiness 1 - 4: {item.cleanliness}</p>
-                                <p>Do you own a pet: {item.hasPets}</p>
-                                <p>If so, what kind: {item.petType}</p>
-                                <p>Do you mind pets: {item.mindsPets}</p>
+                                <p>Tidiness (1 - 4): {item.cleanliness}</p>
+                                <p>Has Pets: {item.hasPets}</p>
+                                {item.petType && <p>Pet Type: {item.petType}</p>}
+                                <p>Minds Pets: {item.mindsPets}</p>
                                 <div className={styles.desc}>
                                     <p>Description: {item.briefDescription}</p>
                                 </div>
                             </div>
-                            <button onClick={() => handleAddItem(item)}>ADD</button>
-                            </div>
+                            <button onClick={() => handleAddItem(item)} className={styles.addButton}>
+                                Add
+                            </button>
+                        </div>
                     </Card>
                 ))}
             </div>
