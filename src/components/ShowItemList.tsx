@@ -29,37 +29,36 @@ export default function ShowItemsList() {
     const [addedItems, setAddedItems] = useState<Item[]>([]); // Roommates for current user
     const [loading, setLoading] = useState(true); // Loading state
 
-    // Fetch roommates for the current user
     useEffect(() => {
         const fetchRoommates = async () => {
             if (!session?.user?.id) return;
-        
+
             try {
                 const response = await fetch(`/api/${session.user.id}`);
                 if (!response.ok) throw new Error('Failed to fetch user data');
                 const userData = await response.json();
-        
-                console.log('Fetched user data:', userData);
-        
+
                 const roommateIDs = Array.isArray(userData.item?.roommates) ? userData.item.roommates : [];
-                console.log('Roommate IDs:', roommateIDs);
-        
+
                 if (roommateIDs.length > 0) {
-                    const roommatePromises = roommateIDs.map((id: string) =>
+                    const roommatePromises = roommateIDs.map((id) =>
                         fetch(`/api/roommate/${id}`).then((res) => {
                             if (!res.ok) throw new Error(`Failed to fetch roommate data for ID: ${id}`);
                             return res.json();
                         })
                     );
-        
-                    const roommateResponses = await Promise.all(roommatePromises);
-                    console.log('Fetched roommate details:', roommateResponses);
-        
-                    // Extract the `data` field from each response
-                    const roommateDetails = roommateResponses.map((response) => response.data);
-                    setAddedItems(roommateDetails);
+
+                    const roommateDetails = await Promise.all(roommatePromises);
+                    const roommateData = roommateDetails.map((res) => res.data);
+
+                    // Remove duplicates
+                    const uniqueRoommates = roommateData.filter(
+                        (item, index, self) => self.findIndex((t) => t._id === item._id) === index
+                    );
+
+                    setAddedItems(uniqueRoommates);
                 } else {
-                    console.error('No roommates found for this user.');
+                    setAddedItems([]); // Reset if no roommates
                 }
             } catch (error) {
                 console.error('Error fetching roommates:', error);
@@ -67,34 +66,43 @@ export default function ShowItemsList() {
                 setLoading(false);
             }
         };
-        
-    
+
         if (status === 'authenticated') {
             fetchRoommates();
         }
     }, [session, status]);
-    
 
-    // Fetch all users
+    // Fetch all users for adding roommates (if needed)
     useEffect(() => {
         const fetchAllUsers = async () => {
             try {
                 const response = await fetch('/api/items');
                 if (!response.ok) throw new Error('Failed to fetch all users');
                 const data = await response.json();
-                setItems(data.items);
+
+                // Filter out already added roommates from the available users
+                const availableUsers = data.items.filter(
+                    (item: Item) => !addedItems.some(addedItem => addedItem._id === item._id)
+                );
+                setItems(availableUsers);
             } catch (error) {
                 console.error('Error fetching users:', error);
             }
         };
 
         fetchAllUsers();
-    }, []);
+    }, [addedItems]); // Re-fetch when `addedItems` change
 
-    // Add a user to the roommate list
+    // Add a roommate
     const handleAddItem = async (item: Item) => {
         if (session?.user?.id) {
             try {
+                // Prevent adding duplicates
+                if (addedItems.some((addedItem) => addedItem._id === item._id)) {
+                    console.log('This roommate is already added.');
+                    return;
+                }
+
                 setItems((prevItems) => prevItems.filter((i) => i._id !== item._id));
                 setAddedItems((prevAddedItems) => [...prevAddedItems, item]);
 
@@ -111,10 +119,24 @@ export default function ShowItemsList() {
         }
     };
 
-    // Remove a user from the roommate list
+    // Remove a roommate
     const handleRemoveItem = async (item: Item) => {
-        setAddedItems((prevAddedItems) => prevAddedItems.filter((i) => i._id !== item._id));
-        setItems((prevItems) => [...prevItems, item]);
+        if (session?.user?.id) {
+            try {
+                setAddedItems((prevAddedItems) => prevAddedItems.filter((i) => i._id !== item._id));
+                setItems((prevItems) => [...prevItems, item]);
+
+                const response = await fetch(`/api/roommate/${session.user.id}`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ roommateId: item._id }),
+                });
+
+                if (!response.ok) throw new Error('Failed to remove roommate');
+            } catch (error) {
+                console.error('Error removing roommate:', error);
+            }
+        }
     };
 
     const handleEmail = (email: string) => {

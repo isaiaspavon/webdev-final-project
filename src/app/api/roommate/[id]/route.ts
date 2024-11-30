@@ -49,71 +49,79 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 // PUT request - Update User's roommates array
 export async function PUT(request: NextRequest, { params }: RouteParams) {
     const { id } = await params;
-    console.log("Received ID for PUT:", id);
-
-    // Validate the ID format
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        console.warn("Invalid ID format");
-        return NextResponse.json({ success: false, message: "Invalid ID format" }, { status: 400 });
+    const { roommates } = await request.json(); // Get the roommates data from the body
+    
+    if (!Array.isArray(roommates)) {
+        return NextResponse.json({ success: false, message: 'Roommates must be an array' }, { status: 400 });
     }
 
-    let body;
+    // Update the user by adding the roommates to the array
     try {
-        body = await request.json();
-        console.log("Request body:", body);
-    } catch (err) {
-        console.error("Error parsing JSON:", err);
-        return NextResponse.json({ success: false, message: "Invalid JSON payload" }, { status: 400 });
-    }
-
-    // Ensure that the roommates field is an array
-    if (!body || !Array.isArray(body.Roommate)) {
-        console.warn("Invalid or missing Roommate field in request body");
-        return NextResponse.json({ success: false, message: "Roommate field must be an array" }, { status: 400 });
-    }
-
-    try {
-        await connectMongoDB();
-        console.log("Connected to MongoDB");
-
-        // Update the user by adding the roommates to the array
-        const updatedUser = await User.findByIdAndUpdate(
-            id,
-            { $push: { roommates: { $each: body.Roommate } } }, // Add multiple roommates if necessary
-            { new: true }
-        );
-
-        console.log("Updated user after PUT:", updatedUser);
-
+        const updatedUser = await User.findByIdAndUpdate(id, { $push: { roommates: { $each: roommates } } }, { new: true });
         if (!updatedUser) {
-            console.warn("User not found during PUT operation");
-            return NextResponse.json({ success: false, message: "User not found" }, { status: 404 });
+            return NextResponse.json({ success: false, message: 'User not found' }, { status: 404 });
         }
-
-        return NextResponse.json({ success: true, data: updatedUser, message: "Roommate added/updated successfully" }, { status: 200 });
+        return NextResponse.json({ success: true, data: updatedUser }, { status: 200 });
     } catch (error) {
-        console.error("Error updating user:", error);
-        return NextResponse.json({ success: false, message: "Internal server error" }, { status: 500 });
-    }}
+        console.error('Error updating roommates:', error);
+        return NextResponse.json({ success: false, message: 'Internal server error' }, { status: 500 });
+    }
+}
+
 
 
 
 
 
 // DELETE an item
-export async function DELETE(request:NextRequest, { params }: RouteParams) {
-    const { id } = params;
+// DELETE request - Remove a specific roommate from the roommates array
+export async function DELETE(request: NextRequest, { params }: RouteParams) {
+    const { id } = await params;
 
+    console.log("Received ID for DELETE:", id);
+
+    // Validate the user ID format
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return NextResponse.json({ message: "Invalid ID format"}, { status: 400});
+        console.warn("Invalid user ID format");
+        return NextResponse.json({ message: "Invalid ID format" }, { status: 400 });
     }
 
-    await connectMongoDB();
-    const deletedItem = await Item.findByIdAndDelete(id);
-
-    if (!deletedItem) {
-        return NextResponse.json({ message: "Item not found"}, { status: 404});
+    let body;
+    try {
+        body = await request.json();
+        console.log("Request body for DELETE:", body);
+    } catch (err) {
+        console.error("Error parsing JSON in DELETE:", err);
+        return NextResponse.json({ success: false, message: "Invalid JSON payload" }, { status: 400 });
     }
 
-    return NextResponse.json({ message: "Item deleted"}, { status: 200});
+    // Ensure roommateId is provided
+    const { roommateId } = body;
+    if (!mongoose.Types.ObjectId.isValid(roommateId)) {
+        console.warn("Invalid roommate ID format");
+        return NextResponse.json({ success: false, message: "Invalid roommate ID format" }, { status: 400 });
+    }
+
+    try {
+        await connectMongoDB();
+        console.log("Connected to MongoDB for DELETE");
+
+        // Remove the specific roommate from the roommates array
+        const updatedUser = await User.findByIdAndUpdate(
+            id,
+            { $pull: { roommates: roommateId } }, // $pull removes specific items from an array
+            { new: true }
+        );
+
+        if (!updatedUser) {
+            console.warn("User not found during DELETE operation");
+            return NextResponse.json({ success: false, message: "User not found" }, { status: 404 });
+        }
+
+        console.log("Updated user after DELETE:", updatedUser);
+        return NextResponse.json({ success: true, data: updatedUser, message: "Roommate removed successfully" }, { status: 200 });
+    } catch (error) {
+        console.error("Error removing roommate:", error);
+        return NextResponse.json({ success: false, message: "Internal server error" }, { status: 500 });
+    }
 }
