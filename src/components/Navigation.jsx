@@ -1,7 +1,8 @@
 // src/components/Navigation.jsx
 
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { signOut } from "next-auth/react";
+
 //import { Link } from 'react-router-dom';
 import Link from "next/link"
 
@@ -27,22 +28,21 @@ const Navigation = () => {
                 </Link>
             </button>
 
-            <button className="nav-item">
-                <Link href="/AvailableSpaces" passHref>
-                    <div className="nav-link">
-                        <img src= 'https://upload.wikimedia.org/wikipedia/commons/d/d0/Simpleicons_Places_home-symbol.svg' alt="house logo" className ="mail-logo" />
-                        <span>Available Spaces</span>
-                    </div>
-                </Link>
-            </button>
-
-            <button className="nav-item">
-                <Link href="/" passHref>
-                    <div className="Logout">
-                        <img src= 'https://cdn.iconscout.com/icon/free/png-256/free-logout-icon-download-in-svg-png-gif-file-formats--sign-out-exit-log-user-interface-pack-icons-1502401.png' alt="house logo" className ="mail-logo" />
-                        <span>Log Out</span>
-                    </div>
-                </Link>
+           <button
+                className="nav-item"
+                onClick={(e) => {
+                    e.preventDefault(); // Prevent default button behavior
+                    signOut({ callbackUrl: "/" }); // Logs out the user and redirects
+                }}
+            >
+                <div className="Logout">
+                    <img
+                        src="https://cdn.iconscout.com/icon/free/png-256/free-logout-icon-download-in-svg-png-gif-file-formats--sign-out-exit-log-user-interface-pack-icons-1502401.png"
+                        alt="logout logo"
+                        className="mail-logo"
+                    />
+                    <span>Log Out</span>
+                </div>
             </button>
         </div> 
     );

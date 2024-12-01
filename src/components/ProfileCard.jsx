@@ -5,6 +5,7 @@ import Image from "next/image";
 import EditItemForm from './editButton';
 import DeleteButtonComponent from './deleteButton';  // Import the DeleteButtonComponent
 import { SessionProvider } from "next-auth/react";
+import Link from "next/link";
 
 
 
@@ -44,7 +45,14 @@ const CardContainer = () => {
   }
 
   if (!session) {
-    return <p>You are not logged in.</p>;
+    return (
+      <div className="logged-out-container">
+        <h1>Please log in to view your profile.</h1>
+        <Link href="/" passHref>
+          <p>Go to Signup</p>
+        </Link>
+      </div>
+    );
   }
 
   if (loading) {

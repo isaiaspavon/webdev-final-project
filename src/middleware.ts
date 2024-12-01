@@ -1,25 +1,26 @@
 import { NextResponse } from "next/server";
-import { authConfig } from "./auth.config";
-import NextAuth from "next-auth";
+import { getToken } from "next-auth/jwt";
 
-const {auth} = NextAuth(authConfig);
+export async function middleware(request: any) {
+  const token = await getToken({
+    req: request,
+    secret: process.env.NEXTAUTH_SECRET,
+  });
 
-export async function middleware(request:any) {
-    const{nextUrl} = request;
-    const session = await auth();
-    const isAuthenticated = !!session?.user;
-    console.log(isAuthenticated, nextUrl.pathname);
+  const { pathname } = request.nextUrl;
 
-    const reqUrl = new URL (request.url);
-    if (!isAuthenticated && reqUrl.pathname !=="/"){
-        return NextResponse.redirect(new URL('/', request.url));
-    }
-    return NextResponse.next();
+  // If no token and not navigating to the home ("/") page, redirect to "/"
+  if (!token && pathname !== "/") {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  // Allow requests if the token exists
+  return NextResponse.next();
 }
 
 export const config = {
-    matcher: [
+  matcher: [
     "/create-item",
-    "/edit-item/:path*"
-    ]
+    "/edit-item/:path*", // Protect dynamic paths
+  ],
 };

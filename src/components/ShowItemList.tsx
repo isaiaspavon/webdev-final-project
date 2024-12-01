@@ -5,6 +5,8 @@ import Card from './Card';
 import Image from 'next/image';
 import styles from './ShowItemLists.module.css';
 import { useSession } from 'next-auth/react';
+import Link from 'next/link';
+
 
 interface Item {
     _id: string;
@@ -69,7 +71,7 @@ export default function ShowItemsList() {
 
         if (status === 'authenticated') {
             fetchRoommates();
-        }
+        } 
     }, [session, status]);
 
     // Fetch all users for adding roommates (if needed)
@@ -137,6 +139,17 @@ export default function ShowItemsList() {
     const handleEmail = (email: string) => {
         window.location.href = `mailto:${email}`;
     };
+
+    if (!session) {
+        return (
+            <div className={styles.loggedOutContainer}>
+                <h1>Please log in to view roommates</h1>
+                <Link href="/signup" passHref>
+                    <p>Go to Signup</p>
+                </Link>
+            </div>
+        );
+    }
 
     return (
         <div>
