@@ -131,12 +131,10 @@ const CardContainer = () => {
       </div>
       {editingItemId && (
         <div className="edit-form-overlay">
-          <div className="edit-block">
           <EditItemForm
             itemId={editingItemId}
             onClose={handleCloseEditForm}
           />
-          </div>
         </div>
       )}
 

@@ -1,0 +1,101 @@
+/* EditItemForm.css */
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+   }
+   
+   /* Modal */
+   .modal {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    
+    height: 500px;
+    overflow: auto;
+   }
+   
+   /* Modal Form */
+   .modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+   }
+   
+   /* Form Inputs */
+   .modal-form input,
+   .modal-form textarea {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+   }
+   
+   .modal-form textarea {
+    resize: vertical;
+    min-height: 100px;
+   }
+   
+   /* Form Group */
+   .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+   }
+   
+   /* Modal Actions (buttons) */
+   .modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+   }
+   
+   .modal-actions button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+   }
+   
+   /* Save Changes Button */
+   .save-changes {
+    background-color: #4CAF50; /* Green */
+    color: white;
+   }
+   
+   .save-changes:hover {
+    background-color: #45a049;
+   }
+   
+   .save-changes:disabled {
+    background-color: #8bc34a;
+    cursor: not-allowed;
+   }
+   
+   /* Cancel Button */
+   .cancel {
+    background-color: #f44336; /* Red */
+    color: white;
+   }
+   
+   .cancel:hover {
+    background-color: #e53935;
+   }
+   
+   .cancel:focus {
+    outline: none;
+   }
