@@ -3,8 +3,7 @@ import './ProfileCard.Module.css';
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import EditItemForm from './editButton';
-import DeleteButtonComponent from './deleteButton';  // Import the DeleteButtonComponent
-import { SessionProvider } from "next-auth/react";
+import DeleteButtonComponent from './deleteButton'; 
 import Link from "next/link";
 
 
@@ -65,25 +64,24 @@ const CardContainer = () => {
 
   const { item } = userData;
 
-//Handle edit
-const handleEditClick = (id) => {
-  setEditingItemId(id); //edit
-}
+  //Handle edit
+  const handleEditClick = (id) => {
+    setEditingItemId(id); //edit
+  }
 
-//Handle close form click
-const handleCloseEditForm = () => {
-  setEditingItemId(null); //close
-}
+  //Handle close form click
+  const handleCloseEditForm = () => {
+    setEditingItemId(null); //close
+  }
 
-// Handle Delete item operation
-const handleDeleteItem = async (id) => {
+  // Handle Delete item operation
+  const handleDeleteItem = async (id) => {
   try {
     const response = await fetch(`/api/items/${id}`, {
       method: 'DELETE',
     });
 
     if (response.ok) {
-      //setItems(items.filter(item => item._id !== id)); // Update the state to remove the deleted item
       setDeletingItemId(null); // Close the modal
     } else {
       console.log('Failed to delete item');
@@ -133,10 +131,12 @@ const handleDeleteItem = async (id) => {
       </div>
       {editingItemId && (
         <div className="edit-form-overlay">
+          <div className="edit-block">
           <EditItemForm
             itemId={editingItemId}
             onClose={handleCloseEditForm}
           />
+          </div>
         </div>
       )}
 

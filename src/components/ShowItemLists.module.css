@@ -1,19 +1,14 @@
-/* Styling each individual profile card */
 .bigCard {
-    /* background-color: slategray;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); */
     background-color: #f5f5f5;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    width: 375px;  /* Width of the card */
-    height: 600px; /* Height of the card */
-    margin: 10px;  /* Margin around each card */
+    width: 375px;  
+    height: 600px; 
+    margin: 10px;  
     display: flex;
-    flex-direction: column; /* Stack elements inside the card vertically */
-    justify-content: space-between; /* Distribute space between child elements */
-    background-color: #fff; /* Optional: pink background */
+    flex-direction: column; 
+    justify-content: space-between; 
+    background-color: #fff; 
     border: 2px solid #000;
     max-width: 300px;
 }
@@ -30,10 +25,9 @@ margin-top: 4%;
 }
 
 .bigCard:hover {
-    transform: translateY(-5px); /* Add a subtle hover effect */
+    transform: translateY(-5px); 
 }
 
-/* Inner card content */
 .innerCard {
     margin-top: 16px;
     justify-content: space-between;
@@ -51,9 +45,9 @@ margin-top: 4%;
 
   .usersContainer {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);  /* Creates 3 equal-width columns */
-    grid-gap: 1rem;                       /* Adds space between items */
-    margin-top: 1%;                       /* Optional: Adds spacing from the top */
+    grid-template-columns: repeat(3, 1fr);  
+    grid-gap: 1rem;                       
+    margin-top: 1%;                      
     background-color: #ccc;
     border: 2px solid #000;
     border-radius: 20px;
@@ -64,17 +58,17 @@ margin-top: 4%;
   .desc {
     border: 2px solid #000;
     border-radius: 20px;
-    width: 100%; /* Takes the full width of the parent container */
-    text-align: left; /* Align text to the left */
-    padding: 8px; /* Add some inner spacing */
-    margin-top: 8px; /* Add spacing from elements above */
-    box-sizing: border-box; /* Ensure padding is included in the width */
+    width: 100%; 
+    text-align: left; 
+    padding: 8px; 
+    margin-top: 8px; 
+    box-sizing: border-box; 
   }
 
   .upperCard {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* Three columns */
-    grid-template-rows: auto; /* Rows will adjust dynamically */
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-rows: auto; 
     gap: 2%;
     border: 2px solid #000;
     padding: 1%;
@@ -85,13 +79,9 @@ margin-top: 4%;
     box-sizing: border-box;
     border-radius: 20px;
     background-color: #c0c0c0;
-    align-items: center; /* Center items vertically if needed */
-    min-height: 250px; /* Set a default space when empty */
+    align-items: center; 
+    min-height: 250px; 
   }
-
-  @import url('https://fonts.googleapis.com/css2?family=Baskervville+SC&family=Kiwi+Maru&display=swap');
-
-/* Chat GPT Shit ON GOD */
 
 .userInfo p {
     font-family: 'Kiwi Maru', serif;
@@ -101,13 +91,13 @@ margin-top: 4%;
 }
 
 .innerCard {
-  background-color: #ffffff; /* White background */
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
-  padding: 1.5rem; /* Padding inside the card */
-  max-width: 275px; /* Optional width constraint */
+  background-color: #ffffff; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
+  padding: 1.5rem; 
+  max-width: 275px; 
   max-height: 350px;
-  margin: auto ; /* Center the card */
+  margin: auto ; 
 }
 
 .userInfo {
@@ -115,14 +105,14 @@ margin-top: 4%;
 }
 
 .userInfo h2 {
-  font-size: 1.25rem; /* Slightly larger font */
-  font-weight: 600; /* Bold text */
-  margin-bottom: 0.5rem; /* Spacing below the name */
+  font-size: 1.25rem; 
+  font-weight: 600; 
+  margin-bottom: 0.5rem; 
 }
 
 .userInfo p {
-  color: #4a4a4a; /* Gray text for less emphasis */
-  margin-bottom: 0.25rem; /* Spacing between lines */
+  color: #4a4a4a;
+  margin-bottom: 0.25rem; 
 }
 
 .petInfo {
@@ -130,21 +120,20 @@ margin-top: 4%;
 }
 
 .petInfo p {
-  margin-bottom: 0.5rem; /* Consistent spacing for pet info */
+  margin-bottom: 0.5rem; 
 }
 
 .desc {
-  border-top: 2.1px solid black; /* Top border for separation */
-  padding-top: .75rem; /* Spacing above the description */
+  border-top: 2.1px solid black; 
+  padding-top: .75rem; 
   max-height: 100px;
 }
 
 .desc p {
-  color: #333333; /* Darker text for readability */
-  line-height: 1.25; /* Improve readability with line spacing */
+  color: #333333; 
+  line-height: 1.25; 
   font-weight: 600;
   margin: auto;
-  /*max-height: 250px; */
   text-align: center;
   max-width: 700px;
 }
@@ -152,21 +141,21 @@ margin-top: 4%;
 
 
 .upperCardlabel {
-    font-size: 1.5rem;  /* Adjust the size of the label */
-    font-weight: bold;  /* Make the label bold */
-    text-align: center;  /* Center the label */
-    width: 100%;  /* Ensure it takes up the full width of the parent container */
-    margin-bottom: 00px;  /* Space between the label and cards */
-    display: block;  /* Make it a block element so it spans full width */
+    font-size: 1.5rem;  
+    font-weight: bold;  
+    text-align: center;  
+    width: 100%;  
+    margin-bottom: 00px;  
+    display: block;  
 }
 
 .lowerCardlabel {
-  font-size: 1.5rem;  /* Adjust the size of the label */
-  font-weight: bold;  /* Make the label bold */
-  text-align: center;  /* Center the label */
-  width: 100%;  /* Ensure it takes up the full width of the parent container */
-  margin-bottom: 0px;  /* Space between the label and cards */
-  display: block;  /* Make it a block element so it spans full width */
+  font-size: 1.5rem;  
+  font-weight: bold;  
+  text-align: center;  
+  width: 100%;  
+  margin-bottom: 0px;  
+  display: block;  
   margin-top: 20px;
 }
 
@@ -176,6 +165,6 @@ margin-top: 4%;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #f9f9f9; /* Optional background color */
+  background-color: #f9f9f9; 
   text-align: center;
 }

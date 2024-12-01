@@ -6,6 +6,6 @@
   height: 400px;
 
   display: flex;
-  flex-direction: column; /* Stack the children vertically*/
-  align-items: center; /* Center the content horizontally  */
+  flex-direction: column; 
+  align-items: center; 
 }

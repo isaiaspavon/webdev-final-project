@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import styles from './addButton.module.css';
 
 interface AddButtonProps {
   id: string;
@@ -28,11 +27,10 @@ const AddButtonComponent = ({ id, onAdd }: AddButtonProps) => {
     <div>
       <button 
         onClick={handleAdd} 
-        className={styles.addButton} 
         disabled={isLoading}>
         {isLoading ? 'Adding...' : 'Add'}
       </button>
-      {error && <p className={styles.error}>{error}</p>}
+      {error && <p>{error}</p>}
     </div>
   );
 };

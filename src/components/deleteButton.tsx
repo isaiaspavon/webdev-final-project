@@ -5,6 +5,8 @@
 import { useState } from 'react';
 import './deleteButton.Module.css';
 import Link from "next/link"
+import { signOut } from "next-auth/react";
+
 
 
 interface DeleteButtonProps {

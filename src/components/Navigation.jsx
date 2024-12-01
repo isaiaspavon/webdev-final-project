@@ -1,9 +1,6 @@
 // src/components/Navigation.jsx
-
 import React from 'react';
 import { signOut } from "next-auth/react";
-
-//import { Link } from 'react-router-dom';
 import Link from "next/link"
 
 import './Navigation.Module.css';
@@ -31,7 +28,7 @@ const Navigation = () => {
            <button
                 className="nav-item"
                 onClick={(e) => {
-                    e.preventDefault(); // Prevent default button behavior
+                    e.preventDefault(); 
                     signOut({ callbackUrl: "/" }); // Logs out the user and redirects
                 }}
             >

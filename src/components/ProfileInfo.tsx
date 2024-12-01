@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useParams } from "react-router"
 import './ProfileCard.Module.css'; 
@@ -26,7 +25,6 @@ interface Item {
 
 export default function GetSpecInfo() {
     const[item, setItem] = useState<Item |null>(null);
-    const router = useRouter();
     const params = useParams();
     const id = params?.id as string;
 

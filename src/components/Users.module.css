@@ -5,7 +5,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     width: 80%;
-    margin: 0 auto; /* Center the big card horizontally */
+    margin: 0 auto; 
     background-color:#BA0C2F;
     border: 2px solid #000;
     margin-left: 13%;
@@ -18,5 +18,5 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 2%;
-    align-items: center; /* Center users vertically if needed */
+    align-items: center; 
   }

@@ -1,5 +1,5 @@
 .navbar {
-    position: fixed;  /* Fix the navbar to the left of the screen */
+    position: fixed;  
     top: 0;
     left: 0;
     display: flex;
@@ -81,12 +81,6 @@
     color: black !important;
 }
 
-/************************/
-/* Fix Spacing on items */
-/************************/
-
-@import url('https://fonts.googleapis.com/css2?family=Baskervville+SC&family=Kiwi+Maru&display=swap');
-
 .nav-link span {
     font-family: 'Kiwi Maru', serif;
     margin-top: 8px;
@@ -101,4 +95,3 @@
     font-weight: 600;
 }
 
-/* line-height: */

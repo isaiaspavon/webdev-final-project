@@ -21,6 +21,6 @@ export async function middleware(request: any) {
 export const config = {
   matcher: [
     "/create-item",
-    "/edit-item/:path*", // Protect dynamic paths
+    "/edit-item/:path*", 
   ],
 };

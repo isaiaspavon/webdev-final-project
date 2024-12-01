@@ -3,7 +3,6 @@ import { useState, ChangeEvent, FormEvent } from 'react';
 import Card from './Card'; 
 import Button from './Button';
 import styles from './RoommateForm.module.css'; 
-import { useRouter } from 'next/navigation';
 
 type User = {
    id: number;

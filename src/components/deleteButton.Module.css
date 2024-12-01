@@ -1,6 +1,3 @@
-/* styles.css */
-
-/* Modal Overlay for Delete Confirmation */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -44,7 +41,6 @@
     cursor: pointer;
   }
   
-  /* Delete button */
   .delete-button {
     background-color: #BA0C2F;
     color: white;
