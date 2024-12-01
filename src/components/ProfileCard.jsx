@@ -48,7 +48,7 @@ const CardContainer = () => {
       <div className="logged-out-container">
         <h1>Please log in to view your profile.</h1>
         <Link href="/" passHref>
-          <p>Go to Signup</p>
+          <p>Go to login</p>
         </Link>
       </div>
     );

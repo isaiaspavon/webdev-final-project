@@ -144,8 +144,8 @@ export default function ShowItemsList() {
         return (
             <div className={styles.loggedOutContainer}>
                 <h1>Please log in to view roommates</h1>
-                <Link href="/signup" passHref>
-                    <p>Go to Signup</p>
+                <Link href="/" passHref>
+                    <p>Go to login</p>
                 </Link>
             </div>
         );
