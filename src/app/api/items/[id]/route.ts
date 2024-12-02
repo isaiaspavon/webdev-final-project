@@ -58,21 +58,36 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
     }
 }
 // DELETE an item by id
+// DELETE an item by id
 export async function DELETE(request: NextRequest, context: RouteParams) {
-   const { id } = await context.params; // Make sure to await the params object
+    const { id } = context.params; // No need to await params, it's a simple object
 
-   // Validate ObjectId format before attempting deletion
-   if (!mongoose.Types.ObjectId.isValid(id)) {
-       return NextResponse.json({ message: "Invalid ID format" }, { status: 400 });
-   }
+    // Validate ObjectId format before attempting deletion
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return NextResponse.json({ message: "Invalid ID format" }, { status: 400 });
+    }
 
-   await connectMongoDB();
-   const deletedItem = await User.findByIdAndDelete(id);
+    await connectMongoDB();
 
-   if (!deletedItem) {
-       return NextResponse.json({ message: "Item not found" }, { status: 404 });
-   }
+    try {
+        // Find and delete the user
+        const deletedItem = await User.findByIdAndDelete(id);
 
-   return NextResponse.json({ message: "Item deleted successfully" }, { status: 200 });
+        if (!deletedItem) {
+            return NextResponse.json({ message: "Item not found" }, { status: 404 });
+        }
+
+        // Remove the deleted user's ID from all `roommates` arrays
+        await User.updateMany(
+            { roommates: id }, // Find users who have this ID in their `roommates` array
+            { $pull: { roommates: id } } // Remove the ID from the array
+        );
+
+        return NextResponse.json({ message: "Item deleted and references cleaned up successfully" }, { status: 200 });
+    } catch (error) {
+        console.error("Error deleting item:", error);
+        return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+    }
 }
+
 
