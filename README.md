@@ -26,6 +26,17 @@ $ npm install react@18.2.0 react-dom@18.2.0
 $ npm install react-router-dom@6.27.0
 ```
 
+```
+npm install next-auth@beta
+```
+
+```
+npm i bcryptjs
+```
+
+```
+npx auth secret
+```
 
 
 ## Coding Workflow
